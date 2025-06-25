@@ -1,89 +1,90 @@
 -- Tạo cơ sở dữ liệu
-CREATE DATABASE [CuaHangGundam];
-GO
-USE [CuaHangGundam];
+CREATE DATABASE CuaHangGundam;
 GO
 
--- Bảng Người Dùng
-CREATE TABLE [Người Dùng] (
-    [Mã Người Dùng] INT IDENTITY(1,1) PRIMARY KEY,
-    [Họ Tên] NVARCHAR(100) NOT NULL,
-    [Email] NVARCHAR(100) NOT NULL UNIQUE,
-    [Mật Khẩu] NVARCHAR(255) NOT NULL,
-    [Số Điện Thoại] VARCHAR(20),
-    [Địa Chỉ] NVARCHAR(255),
-    [Vai Trò] NVARCHAR(10) DEFAULT N'Khách',
-    [Ngày Tạo] DATETIME DEFAULT GETDATE()
+USE CuaHangGundam;
+GO
+
+-- Bảng NguoiDung
+CREATE TABLE NguoiDung (
+    maNguoiDung INT IDENTITY(1,1) PRIMARY KEY,
+    hoTen NVARCHAR(100) NOT NULL,
+    email NVARCHAR(100) NOT NULL UNIQUE,
+    matKhau NVARCHAR(255) NOT NULL,
+    soDienThoai VARCHAR(20),
+    diaChi NVARCHAR(255),
+    vaiTro NVARCHAR(10) DEFAULT N'Khach',
+    ngayTao DATETIME DEFAULT GETDATE()
 );
 
--- Bảng Danh Mục Sản Phẩm
-CREATE TABLE [Danh Mục] (
-    [Mã Danh Mục] INT IDENTITY(1,1) PRIMARY KEY,
-    [Tên Danh Mục] NVARCHAR(100) NOT NULL,
-    [Mô Tả] NVARCHAR(255)
+-- Bảng LoaiSanPham
+CREATE TABLE LoaiSanPham (
+    maLoai INT IDENTITY(1,1) PRIMARY KEY,
+    tenLoai NVARCHAR(100) NOT NULL,
+    moTa NVARCHAR(255)
 );
 
--- Bảng Thương Hiệu
-CREATE TABLE [Thương Hiệu] (
-    [Mã Thương Hiệu] INT IDENTITY(1,1) PRIMARY KEY,
-    [Tên Thương Hiệu] NVARCHAR(100) NOT NULL,
-    [Quốc Gia] NVARCHAR(100)
+-- Bảng ThuongHieu
+CREATE TABLE ThuongHieu (
+    maThuongHieu INT IDENTITY(1,1) PRIMARY KEY,
+    tenThuongHieu NVARCHAR(100) NOT NULL,
+    quocGia NVARCHAR(100)
 );
 
--- Bảng Sản Phẩm
-CREATE TABLE [Sản Phẩm] (
-    [Mã Sản Phẩm] INT IDENTITY(1,1) PRIMARY KEY,
-    [Tên Sản Phẩm] NVARCHAR(255) NOT NULL,
-    [Mã Danh Mục] INT NOT NULL FOREIGN KEY REFERENCES [Danh Mục]([Mã Danh Mục]),
-    [Mã Thương Hiệu] INT NOT NULL FOREIGN KEY REFERENCES [Thương Hiệu]([Mã Thương Hiệu]),
-    [Giá Bán] DECIMAL(10,2) NOT NULL,
-    [Số Lượng Tồn] INT NOT NULL,
-    [Hình Ảnh] NVARCHAR(255),
-    [Mô Tả] NVARCHAR(MAX),
-    [Ngày Thêm] DATETIME DEFAULT GETDATE()
+-- Bảng SanPham
+CREATE TABLE SanPham (
+    maSanPham INT IDENTITY(1,1) PRIMARY KEY,
+    tenSanPham NVARCHAR(255) NOT NULL,
+    maLoaiSanPham INT NOT NULL FOREIGN KEY REFERENCES LoaiSanPham(maLoai),
+    maThuongHieu INT NOT NULL FOREIGN KEY REFERENCES ThuongHieu(maThuongHieu),
+    giaBan DECIMAL(10,2) NOT NULL,
+    soLuong INT NOT NULL,
+    hinhAnh NVARCHAR(255),
+    moTa NVARCHAR(MAX),
+    ngayThem DATETIME DEFAULT GETDATE()
 );
 
--- Bảng Giỏ Hàng
-CREATE TABLE [Giỏ Hàng] (
-    [Mã Giỏ Hàng] INT IDENTITY(1,1) PRIMARY KEY,
-    [Mã Người Dùng] INT NOT NULL FOREIGN KEY REFERENCES [Người Dùng]([Mã Người Dùng]),
-    [Ngày Tạo] DATETIME DEFAULT GETDATE()
+-- Bảng GioHang
+CREATE TABLE GioHang (
+    maGioHang INT IDENTITY(1,1) PRIMARY KEY,
+    maNguoiDung INT NOT NULL FOREIGN KEY REFERENCES NguoiDung(maNguoiDung),
+    ngayTao DATETIME DEFAULT GETDATE()
 );
 
--- Bảng Chi Tiết Giỏ Hàng
-CREATE TABLE [Chi Tiết Giỏ Hàng] (
-    [Mã Chi Tiết] INT IDENTITY(1,1) PRIMARY KEY,
-    [Mã Giỏ Hàng] INT NOT NULL FOREIGN KEY REFERENCES [Giỏ Hàng]([Mã Giỏ Hàng]),
-    [Mã Sản Phẩm] INT NOT NULL FOREIGN KEY REFERENCES [Sản Phẩm]([Mã Sản Phẩm]),
-    [Số Lượng] INT NOT NULL,
-    [Giá] DECIMAL(10,2) NOT NULL
+-- Bảng ChiTietGioHang
+CREATE TABLE ChiTietGioHang (
+    maChiTiet INT IDENTITY(1,1) PRIMARY KEY,
+    maGioHang INT NOT NULL FOREIGN KEY REFERENCES GioHang(maGioHang),
+    maSanPham INT NOT NULL FOREIGN KEY REFERENCES SanPham(maSanPham),
+    soLuong INT NOT NULL,
+    gia DECIMAL(10,2) NOT NULL
 );
 
--- Bảng Đơn Hàng
-CREATE TABLE [Đơn Hàng] (
-    [Mã Đơn Hàng] INT IDENTITY(1,1) PRIMARY KEY,
-    [Mã Người Dùng] INT NOT NULL FOREIGN KEY REFERENCES [Người Dùng]([Mã Người Dùng]),
-    [Ngày Đặt] DATETIME DEFAULT GETDATE(),
-    [Tổng Tiền] DECIMAL(10,2) NOT NULL,
-    [Địa Chỉ Giao] NVARCHAR(255),
-    [Trạng Thái] NVARCHAR(50) DEFAULT N'Chờ xử lý'
+-- Bảng DonHang
+CREATE TABLE DonHang (
+    maDonHang INT IDENTITY(1,1) PRIMARY KEY,
+    maNguoiDung INT NOT NULL FOREIGN KEY REFERENCES NguoiDung(maNguoiDung),
+    ngayDat DATETIME DEFAULT GETDATE(),
+    tongTien DECIMAL(10,2) NOT NULL,
+    diaChiGiao NVARCHAR(255),
+    trangThai NVARCHAR(50) DEFAULT N'Cho xu ly'
 );
 
--- Bảng Chi Tiết Đơn Hàng
-CREATE TABLE [Chi Tiết Đơn Hàng] (
-    [Mã Chi Tiết] INT IDENTITY(1,1) PRIMARY KEY,
-    [Mã Đơn Hàng] INT NOT NULL FOREIGN KEY REFERENCES [Đơn Hàng]([Mã Đơn Hàng]),
-    [Mã Sản Phẩm] INT NOT NULL FOREIGN KEY REFERENCES [Sản Phẩm]([Mã Sản Phẩm]),
-    [Số Lượng] INT NOT NULL,
-    [Giá] DECIMAL(10,2) NOT NULL
+-- Bảng ChiTietDonHang
+CREATE TABLE ChiTietDonHang (
+    maChiTiet INT IDENTITY(1,1) PRIMARY KEY,
+    maDonHang INT NOT NULL FOREIGN KEY REFERENCES DonHang(maDonHang),
+    maSanPham INT NOT NULL FOREIGN KEY REFERENCES SanPham(maSanPham),
+    soLuong INT NOT NULL,
+    gia DECIMAL(10,2) NOT NULL
 );
 
--- Bảng Đánh Giá (Tùy chọn)
-CREATE TABLE [Đánh Giá] (
-    [Mã Đánh Giá] INT IDENTITY(1,1) PRIMARY KEY,
-    [Mã Người Dùng] INT NOT NULL FOREIGN KEY REFERENCES [Người Dùng]([Mã Người Dùng]),
-    [Mã Sản Phẩm] INT NOT NULL FOREIGN KEY REFERENCES [Sản Phẩm]([Mã Sản Phẩm]),
-    [Số Sao] INT CHECK ([Số Sao] BETWEEN 1 AND 5),
-    [Bình Luận] NVARCHAR(500),
-    [Ngày Đánh Giá] DATETIME DEFAULT GETDATE()
+-- Bảng DanhGia
+CREATE TABLE DanhGia (
+    maDanhGia INT IDENTITY(1,1) PRIMARY KEY,
+    maNguoiDung INT NOT NULL FOREIGN KEY REFERENCES NguoiDung(maNguoiDung),
+    maSanPham INT NOT NULL FOREIGN KEY REFERENCES SanPham(maSanPham),
+    soSao INT CHECK (soSao BETWEEN 1 AND 5),
+    binhLuan NVARCHAR(500),
+    ngayDanhGia DATETIME DEFAULT GETDATE()
 );
