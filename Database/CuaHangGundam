@@ -1,90 +1,89 @@
--- Tạo cơ sở dữ liệu
-CREATE DATABASE CuaHangGundam;
+
+CREATE DATABASE [CuaHangGundam];
+GO
+USE [CuaHangGundam];
 GO
 
-USE CuaHangGundam;
-GO
 
--- Bảng NguoiDung
-CREATE TABLE NguoiDung (
-    maNguoiDung INT IDENTITY(1,1) PRIMARY KEY,
-    hoTen NVARCHAR(100) NOT NULL,
-    email NVARCHAR(100) NOT NULL UNIQUE,
-    matKhau NVARCHAR(255) NOT NULL,
-    soDienThoai VARCHAR(20),
-    diaChi NVARCHAR(255),
-    vaiTro NVARCHAR(10) DEFAULT N'Khach',
-    ngayTao DATETIME DEFAULT GETDATE()
+CREATE TABLE [Nguoi Dung] (
+    [Ma Nguoi Dung] INT IDENTITY(1,1) PRIMARY KEY,
+    [Ho Ten] NVARCHAR(100) NOT NULL,
+    [Email] NVARCHAR(100) NOT NULL UNIQUE,
+    [Mat Khau] NVARCHAR(255) NOT NULL,
+    [So Đien Thoai] VARCHAR(20),
+    [Đia Chi] NVARCHAR(255),
+    [Vai Tro] NVARCHAR(10) DEFAULT N'Khách',
+    [Ngay Tao] DATETIME DEFAULT GETDATE()
 );
 
--- Bảng LoaiSanPham
-CREATE TABLE LoaiSanPham (
-    maLoai INT IDENTITY(1,1) PRIMARY KEY,
-    tenLoai NVARCHAR(100) NOT NULL,
-    moTa NVARCHAR(255)
+
+CREATE TABLE [Danh Muc] (
+    [Ma Danh Muc] INT IDENTITY(1,1) PRIMARY KEY,
+    [Ten Danh Muc] NVARCHAR(100) NOT NULL,
+    [Mo Ta] NVARCHAR(255)
 );
 
--- Bảng ThuongHieu
-CREATE TABLE ThuongHieu (
-    maThuongHieu INT IDENTITY(1,1) PRIMARY KEY,
-    tenThuongHieu NVARCHAR(100) NOT NULL,
-    quocGia NVARCHAR(100)
+
+CREATE TABLE [Thuong Hieu] (
+    [Ma Thuong Hieu] INT IDENTITY(1,1) PRIMARY KEY,
+    [Ten Thuong Hieu] NVARCHAR(100) NOT NULL,
+    [Quoc Gia] NVARCHAR(100)
 );
 
--- Bảng SanPham
-CREATE TABLE SanPham (
-    maSanPham INT IDENTITY(1,1) PRIMARY KEY,
-    tenSanPham NVARCHAR(255) NOT NULL,
-    maLoaiSanPham INT NOT NULL FOREIGN KEY REFERENCES LoaiSanPham(maLoai),
-    maThuongHieu INT NOT NULL FOREIGN KEY REFERENCES ThuongHieu(maThuongHieu),
-    giaBan DECIMAL(10,2) NOT NULL,
-    soLuong INT NOT NULL,
-    hinhAnh NVARCHAR(255),
-    moTa NVARCHAR(MAX),
-    ngayThem DATETIME DEFAULT GETDATE()
+
+CREATE TABLE [San Pham] (
+    [Ma San Pham] INT IDENTITY(1,1) PRIMARY KEY,
+    [Ten San Pham] NVARCHAR(255) NOT NULL,
+    [Ma Danh Muc] INT NOT NULL FOREIGN KEY REFERENCES [Danh Muc]([Ma Danh Muc]),
+    [Ma Thương Hieu] INT NOT NULL FOREIGN KEY REFERENCES [Thuong Hieu]([Ma Thuong Hieu]),
+    [Gia Ban] DECIMAL(10,2) NOT NULL,
+    [So Luong Ton] INT NOT NULL,
+    [Hinh Anh] NVARCHAR(255),
+    [Mo Ta] NVARCHAR(MAX),
+    [Ngay Them] DATETIME DEFAULT GETDATE()
 );
 
--- Bảng GioHang
-CREATE TABLE GioHang (
-    maGioHang INT IDENTITY(1,1) PRIMARY KEY,
-    maNguoiDung INT NOT NULL FOREIGN KEY REFERENCES NguoiDung(maNguoiDung),
-    ngayTao DATETIME DEFAULT GETDATE()
+
+CREATE TABLE [Gio Hang] (
+    [Ma Gio Hang] INT IDENTITY(1,1) PRIMARY KEY,
+    [Ma Nguoi Dung] INT NOT NULL FOREIGN KEY REFERENCES [Nguoi Dung]([Ma Nguoi Dung]),
+    [Ngay Tao] DATETIME DEFAULT GETDATE()
 );
 
--- Bảng ChiTietGioHang
-CREATE TABLE ChiTietGioHang (
-    maChiTiet INT IDENTITY(1,1) PRIMARY KEY,
-    maGioHang INT NOT NULL FOREIGN KEY REFERENCES GioHang(maGioHang),
-    maSanPham INT NOT NULL FOREIGN KEY REFERENCES SanPham(maSanPham),
-    soLuong INT NOT NULL,
-    gia DECIMAL(10,2) NOT NULL
+
+CREATE TABLE [Chi Tiet Gio Hang] (
+    [Ma Chi Tiet] INT IDENTITY(1,1) PRIMARY KEY,
+    [Ma Gio Hang] INT NOT NULL FOREIGN KEY REFERENCES [Gio Hang]([Ma Gio Hang]),
+    [Ma San Pham] INT NOT NULL FOREIGN KEY REFERENCES [San Pham]([Ma San Pham]),
+    [So Luong] INT NOT NULL,
+    [Gia] DECIMAL(10,2) NOT NULL
 );
 
--- Bảng DonHang
-CREATE TABLE DonHang (
-    maDonHang INT IDENTITY(1,1) PRIMARY KEY,
-    maNguoiDung INT NOT NULL FOREIGN KEY REFERENCES NguoiDung(maNguoiDung),
-    ngayDat DATETIME DEFAULT GETDATE(),
-    tongTien DECIMAL(10,2) NOT NULL,
-    diaChiGiao NVARCHAR(255),
-    trangThai NVARCHAR(50) DEFAULT N'Cho xu ly'
+
+CREATE TABLE [Don Hang] (
+    [Ma Don Hang] INT IDENTITY(1,1) PRIMARY KEY,
+    [Ma Nguoi Dung] INT NOT NULL FOREIGN KEY REFERENCES [Nguoi Dung]([Ma Nguoi Dung]),
+    [Ngay Dat] DATETIME DEFAULT GETDATE(),
+    [Tong Tien] DECIMAL(10,2) NOT NULL,
+    [Dia Chi Giao] NVARCHAR(255),
+    [Trang Thai] NVARCHAR(50) DEFAULT N'Cho xu ly'
 );
 
--- Bảng ChiTietDonHang
-CREATE TABLE ChiTietDonHang (
-    maChiTiet INT IDENTITY(1,1) PRIMARY KEY,
-    maDonHang INT NOT NULL FOREIGN KEY REFERENCES DonHang(maDonHang),
-    maSanPham INT NOT NULL FOREIGN KEY REFERENCES SanPham(maSanPham),
-    soLuong INT NOT NULL,
-    gia DECIMAL(10,2) NOT NULL
+
+CREATE TABLE [Chi Tiet Don Hang] (
+    [Ma Chi Tiet] INT IDENTITY(1,1) PRIMARY KEY,
+    [Ma Don Hang] INT NOT NULL FOREIGN KEY REFERENCES [Don Hang]([Ma Don Hang]),
+    [Ma San Pham] INT NOT NULL FOREIGN KEY REFERENCES [San Pham]([Ma San Pham]),
+    [So Luong] INT NOT NULL,
+    [Gia] DECIMAL(10,2) NOT NULL
 );
 
--- Bảng DanhGia
-CREATE TABLE DanhGia (
-    maDanhGia INT IDENTITY(1,1) PRIMARY KEY,
-    maNguoiDung INT NOT NULL FOREIGN KEY REFERENCES NguoiDung(maNguoiDung),
-    maSanPham INT NOT NULL FOREIGN KEY REFERENCES SanPham(maSanPham),
-    soSao INT CHECK (soSao BETWEEN 1 AND 5),
-    binhLuan NVARCHAR(500),
-    ngayDanhGia DATETIME DEFAULT GETDATE()
+
+CREATE TABLE [Danh Gia] (
+    [Ma Danh Gia] INT IDENTITY(1,1) PRIMARY KEY,
+    [Ma Nguoi Dung] INT NOT NULL FOREIGN KEY REFERENCES [Nguoi Dung]([Ma Nguoi Dung]),
+    [Ma San Pham] INT NOT NULL FOREIGN KEY REFERENCES [San Pham]([Ma San Pham]),
+    [So Sao] INT CHECK ([Số Sao] BETWEEN 1 AND 5),
+    [Binh Luan] NVARCHAR(500),
+    [Ngay Danh Gia] DATETIME DEFAULT GETDATE()
 );
