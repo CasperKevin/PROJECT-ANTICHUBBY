@@ -92,6 +92,17 @@ CREATE TABLE DanhGia (
     FOREIGN KEY (maSanPham) REFERENCES SanPham(maSanPham)
 );
 
+CREATE TABLE Admin (
+    maAdmin INT AUTO_INCREMENT PRIMARY KEY,
+    hoTen VARCHAR(100) NOT NULL,
+    tenDangNhap VARCHAR(50) NOT NULL UNIQUE,
+    matKhau VARCHAR(255) NOT NULL,
+    email VARCHAR(100) UNIQUE,
+    soDienThoai VARCHAR(20),
+    capBac VARCHAR(20) DEFAULT 'QuanLy',
+    ngayTao DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
 
 
 DELIMITER //
@@ -175,3 +186,8 @@ VALUES
 (2, 1, 5, 'Rất đáng tiền, chi tiết tốt'),
 (3, 3, 4, 'Đẹp nhưng lắp hơi khó'),
 (2, 2, 5, 'Tuyệt vời, đáng mua');
+INSERT INTO Admin (hoTen, tenDangNhap, matKhau, email, soDienThoai, capBac)
+VALUES 
+('Nguyễn Thành Đạt', 'admin_gundam', 'admin123', 'admin@gundamshop.vn', '0909555111', 'SuperAdmin'),
+('Lê Hồng Phúc', 'quanly_phuc', 'phuc321', 'phuc@gundamshop.vn', '0933444555', 'QuanLy');
+
