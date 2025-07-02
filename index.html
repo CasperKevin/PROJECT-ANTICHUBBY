@@ -9,6 +9,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
     />
+    <link rel="stylesheet" href="/CSS/index.css" />
   </head>
   <body>
     <!-- Header -->
@@ -40,6 +41,14 @@
               <i class="fas fa-shopping-cart"></i>
               <span class="cart-count">0</span>
             </a>
+          </div>
+          <div id="login-or-res">
+            <a href="/HTML/login.html" class="login"
+              ><i class="fas fa-sign-in-alt"></i> Đăng nhập</a
+            >
+            <a href="/HTML/register.html" class="register"
+              ><i class="fas fa-user-plus"></i> Đăng ký</a
+            >
           </div>
         </div>
 
@@ -234,61 +243,21 @@
         </div>
       </div>
     </footer>
-
-    <!-- Login Modal -->
-    <div class="modal" id="loginModal">
-      <div class="modal-content">
-        <span class="close-modal">&times;</span>
-        <h2>Đăng nhập</h2>
-        <form id="loginForm">
-          <div class="form-group">
-            <input type="email" placeholder="Email" required />
-          </div>
-          <div class="form-group">
-            <input type="password" placeholder="Mật khẩu" required />
-          </div>
-          <button type="submit" class="btn">Đăng nhập</button>
-          <div class="form-footer">
-            <a href="/HTML/forgot-password.html">Quên mật khẩu?</a>
-            <p>
-              Chưa có tài khoản? <a href="#" id="showRegister">Đăng ký ngay</a>
-            </p>
-          </div>
-        </form>
-      </div>
-    </div>
-
-    <!-- Register Modal -->
-    <div class="modal" id="registerModal">
-      <div class="modal-content">
-        <span class="close-modal">&times;</span>
-        <h2>Đăng ký tài khoản</h2>
-        <form id="registerForm">
-          <div class="form-group">
-            <input type="text" placeholder="Họ và tên" required />
-          </div>
-          <div class="form-group">
-            <input type="email" placeholder="Email" required />
-          </div>
-          <div class="form-group">
-            <input type="password" placeholder="Mật khẩu" required />
-          </div>
-          <div class="form-group">
-            <input type="password" placeholder="Nhập lại mật khẩu" required />
-          </div>
-          <div class="form-group">
-            <input type="tel" placeholder="Số điện thoại" />
-          </div>
-          <button type="submit" class="btn">Đăng ký</button>
-          <div class="form-footer">
-            <p>
-              Đã có tài khoản? <a href="#" id="showLogin">Đăng nhập ngay</a>
-            </p>
-          </div>
-        </form>
-      </div>
-    </div>
-
     <script src="/JavaScript/script.js"></script>
+    <script>
+      //Hide login and register until user mouse in .account
+      document.addEventListener("DOMContentLoaded", function () {
+        const accountIcon = document.querySelector(".header-icons .account");
+        const loginOrRes = document.getElementById("login-or-res");
+
+        accountIcon.addEventListener("mouseover", function () {
+          loginOrRes.style.display = "block";
+        });
+
+        accountIcon.addEventListener("mouseout", function () {
+          loginOrRes.style.display = "none";
+        });
+      });
+    </script>
   </body>
 </html>

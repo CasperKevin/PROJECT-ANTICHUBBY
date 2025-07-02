@@ -1,1 +1,18 @@
-
+#login-or-res {
+  display: none;
+}
+/*Show login and register beside account icon when mouse hover*/
+.header-icons .account:hover + #login-or-res {
+  display: block;
+}
+/* Style for login and register links */
+#login-or-res a {
+  display: inline-block;
+  margin: 0 10px;
+  color: #333;
+  text-decoration: none;
+  font-weight: bold;
+}
+#login-or-res a:hover {
+  color: #007bff;
+}
