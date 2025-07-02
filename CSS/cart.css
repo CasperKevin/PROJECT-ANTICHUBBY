@@ -1,0 +1,267 @@
+/* ==================== */
+/* 🛒 Cart Page Styles */
+/* ==================== */
+
+.cart-section {
+  padding: 60px 0;
+}
+
+/* 🪦 Trạng thái giỏ hàng trống */
+.cart-empty {
+  text-align: center;
+  padding: 60px 0;
+  display: none;
+}
+
+.cart-empty i {
+  font-size: 60px;
+  color: #e63946;
+  margin-bottom: 20px;
+}
+
+.cart-empty h3 {
+  font-size: 24px;
+  margin-bottom: 10px;
+  color: #1a1a2e;
+}
+
+.cart-empty p {
+  color: #6c757d;
+  margin-bottom: 25px;
+}
+
+/* 🧺 Nội dung giỏ hàng */
+.cart-content {
+  display: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: space-between;
+}
+
+/* 🛍 Danh sách sản phẩm */
+.cart-items {
+  flex: 1;
+  min-width: 60%;
+}
+
+.cart-header,
+.cart-item {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 10px;
+  padding: 15px 0;
+  border-bottom: 1px solid #eee;
+  align-items: center;
+}
+
+.cart-header {
+  font-weight: 600;
+  color: #1a1a2e;
+  border-bottom: 2px solid #ddd;
+}
+
+/* 📦 Chi tiết từng sản phẩm */
+.cart-item img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-right: 15px;
+}
+
+.product-info {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+/* 🔢 Số lượng */
+.product-quantity {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.quantity-btn {
+  width: 32px;
+  height: 32px;
+  background-color: #f1f1f1;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s ease;
+}
+
+.quantity-btn:hover {
+  background-color: #e9ecef;
+}
+
+.product-quantity input {
+  width: 50px;
+  height: 32px;
+  text-align: center;
+  border: 1px solid #ccc;
+  border-left: none;
+  border-right: none;
+}
+
+/* 💰 Tổng từng sản phẩm */
+.product-total {
+  font-weight: 600;
+  color: #1a1a2e;
+}
+
+/* 🧾 Thông tin thanh toán */
+.cart-summary {
+  width: 350px;
+  min-width: 280px;
+  background-color: #f8f9fa;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.cart-summary h3 {
+  font-size: 20px;
+  margin-bottom: 20px;
+  color: #1a1a2e;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-size: 15px;
+}
+
+.summary-row.total {
+  margin-top: 20px;
+  font-size: 18px;
+  font-weight: 600;
+  border-top: 1px solid #ddd;
+  padding-top: 15px;
+}
+
+/* 🎟 Mã giảm giá */
+.coupon-form {
+  display: flex;
+  margin: 20px 0;
+}
+
+.coupon-form input {
+  flex: 1;
+  padding: 10px 15px;
+  border: 1px solid #ddd;
+  border-radius: 4px 0 0 4px;
+}
+
+.coupon-form .btn {
+  border-radius: 0 4px 4px 0;
+}
+
+/* ✅ Nút thanh toán */
+.checkout-btn {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  background-color: #e63946;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.checkout-btn:hover {
+  background-color: #c1121f;
+}
+
+#cartContent {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.35);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+#cart {
+  background: #fff;
+  border-radius: 16px;
+  padding: 32px 24px;
+  min-width: 340px;
+  max-width: 90vw;
+  box-shadow: 0 4px 32px rgba(0, 0, 0, 0.18);
+  position: relative;
+}
+#close_cart {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: #dc3545;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 6px 16px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+#close_cart:hover {
+  background: #a71d2a;
+}
+
+#cart table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 24px;
+}
+#cart th,
+#cart td {
+  border: 1px solid #eee;
+  padding: 10px 6px;
+  text-align: center;
+}
+#cart th {
+  background: #f2f2f2;
+}
+#cart_items img {
+  width: 48px;
+  border-radius: 6px;
+}
+#cart_items button {
+  background: #28a745;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 4px 12px;
+  margin: 0 2px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+#cart_items button:hover {
+  background: #1a5c28;
+}
+#cart_items .delete-btn {
+  background: #dc3545;
+}
+#cart_items .delete-btn:hover {
+  background: #a71d2a;
+}
+
+#total_price {
+  text-align: right;
+  margin-top: 16px;
+  font-size: 1.1rem;
+  font-weight: bold;
+}

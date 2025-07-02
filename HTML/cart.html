@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gundam Store - Mô Hình Gundam Chính Hãng</title>
+    <link rel="stylesheet" href="/CSS/style.css" />
+    <link rel="stylesheet" href="/CSS/cart.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <div class="container">
+        <div class="header-top">
+          <div class="logo">
+            <a href="/index.html">
+              <img
+                src="https://via.placeholder.com/150x50?text=GUNDAM+STORE"
+                alt="Gundam Store Logo"
+              />
+            </a>
+          </div>
+          <div class="search-box">
+            <input type="text" placeholder="Tìm kiếm sản phẩm..." />
+            <button><i class="fas fa-search"></i></button>
+          </div>
+          <div class="header-icons">
+            <a href="account.html" class="account"
+              ><i class="fas fa-user"></i
+            ></a>
+            <a href="wishlist.html" class="wishlist"
+              ><i class="fas fa-heart"></i
+            ></a>
+            <a href="cart.html" class="cart">
+              <i class="fas fa-shopping-cart"></i>
+              <span class="cart-count">0</span>
+            </a>
+          </div>
+        </div>
+        <nav class="main-nav">
+          <ul>
+            <li><a href="/index.html">Trang chủ</a></li>
+            <li class="dropdown">
+              <a href="products.html"
+                >Sản phẩm <i class="fas fa-chevron-down"></i
+              ></a>
+              <div class="dropdown-menu">
+                <a href="category.html?type=hg">High Grade (HG)</a>
+                <a href="category.html?type=rg">Real Grade (RG)</a>
+                <a href="category.html?type=mg">Master Grade (MG)</a>
+                <a href="category.html?type=pg">Perfect Grade (PG)</a>
+              </div>
+            </li>
+            <li><a href="about.html">Về chúng tôi</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="contact.html">Liên hệ</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Wishlist Section -->
+    <section class="page-header">
+      <div class="container">
+        <h1>Danh Sách Yêu Thích</h1>
+        <p>Các sản phẩm bạn đã lưu lại</p>
+      </div>
+    </section>
+    <section class="wishlist-section">
+      <div class="container">
+        <div class="wishlist-empty" id="wishlistEmpty">
+          <i class="far fa-heart"></i>
+          <h3>Danh sách yêu thích của bạn đang trống</h3>
+          <p>
+            Hãy bấm vào biểu tượng ♡ trên sản phẩm để thêm vào danh sách yêu
+            thích
+          </p>
+          <a href="products.html" class="btn">Tiếp tục mua sắm</a>
+        </div>
+
+        <div class="wishlist-items" id="wishlistItems">
+          <div class="wishlist-header">
+            <h3>Sản phẩm</h3>
+            <h3>Giá</h3>
+            <h3>Tình trạng</h3>
+            <h3>Hành động</h3>
+          </div>
+
+          <!-- Wishlist Items - Có thể lặp qua bằng JS khi cần -->
+          <!-- Bỏ lặp tĩnh để clean hơn -->
+        </div>
+
+        <div class="wishlist-footer">
+          <button class="btn btn-outline">Tiếp tục mua sắm</button>
+          <button class="btn">Xóa tất cả</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cart Section -->
+    <section class="page-header">
+      <div class="container">
+        <h1>Giỏ Hàng</h1>
+        <p>Xem lại các sản phẩm bạn đã chọn</p>
+      </div>
+    </section>
+    <section class="cart-section">
+      <div class="container">
+        <div class="cart-empty" id="cartEmpty">
+          <i class="fas fa-shopping-cart"></i>
+          <h3>Giỏ hàng của bạn đang trống</h3>
+          <p>Hãy thêm sản phẩm vào giỏ hàng để bắt đầu mua sắm</p>
+          <a href="products.html" class="btn">Tiếp tục mua sắm</a>
+        </div>
+
+        <div id="cartContent" class="cart-content">
+            <div id="cart">
+                <button id="close_cart">Đóng</button>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Tên sản phẩm</th>
+                      <th>Ảnh sản phẩm</th>
+                      <th>Giá</th>
+                      <th>Số lượng</th>
+                      <th>Tổng tiền</th>
+                      <th>Chỉnh sửa</th>
+                      <th>Xóa</th>
+                    </tr>
+                  </thead>
+                  <tbody id="cart_items"></tbody>
+                </table>
+                <div
+                  id="total_price"
+                  style="
+                    text-align: right;
+                    margin-top: 16px;
+                    font-size: 1.1rem;
+                    font-weight: bold;
+                  "
+                >
+                  Tổng đơn hàng: 0 VNĐ
+                </div>
+              </div>
+        </div>
+
+          <div class="cart-summary">
+            <h3>Tóm Tắt Đơn Hàng</h3>
+            <div class="summary-row"><span>Tạm tính</span><span>0đ</span></div>
+            <div class="summary-row">
+              <span>Phí vận chuyển</span><span>0đ</span>
+            </div>
+            <div class="summary-row"><span>Giảm giá</span><span>0đ</span></div>
+            <div class="summary-row total">
+              <span>Tổng cộng</span><span>0đ</span>
+            </div>
+            <div class="coupon-form">
+              <input type="text" placeholder="Mã giảm giá" />
+              <button class="btn btn-outline">Áp dụng</button>
+            </div>
+            <a href="checkout.html" class="btn checkout-btn"
+              >Tiến hành thanh toán</a
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-col">
+            <h3>Gundam Store</h3>
+            <p>
+              Chuyên cung cấp các mẫu mô hình Gundam chính hãng từ Bandai Nhật
+              Bản.
+            </p>
+            <div class="social-links">
+              <a href="#"><i class="fab fa-facebook-f"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+              <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+          </div>
+          <div class="footer-col">
+            <h3>Thông tin</h3>
+            <ul>
+              <li><a href="about.html">Về chúng tôi</a></li>
+              <li><a href="blog.html">Blog</a></li>
+              <li><a href="contact.html">Liên hệ</a></li>
+              <li><a href="policy.html">Chính sách bảo mật</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h3>Hỗ trợ</h3>
+            <ul>
+              <li><a href="faq.html">Câu hỏi thường gặp</a></li>
+              <li><a href="shipping.html">Vận chuyển</a></li>
+              <li><a href="return.html">Đổi trả</a></li>
+              <li><a href="payment.html">Thanh toán</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h3>Liên hệ</h3>
+            <ul class="contact-info">
+              <li>
+                <i class="fas fa-map-marker-alt"></i> 123 Đường ABC, Quận 1,
+                TP.HCM
+              </li>
+              <li><i class="fas fa-phone"></i> (028) 1234 5678</li>
+              <li><i class="fas fa-envelope"></i> info@gundamstore.com</li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2023 Gundam Store. All rights reserved.</p>
+          <div class="payment-methods">
+            <img src="https://via.placeholder.com/40x25?text=VISA" alt="Visa" />
+            <img
+              src="https://via.placeholder.com/40x25?text=MC"
+              alt="Mastercard"
+            />
+            <img src="https://via.placeholder.com/40x25?text=JCB" alt="JCB" />
+            <img src="https://via.placeholder.com/40x25?text=COD" alt="COD" />
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        const cartItems = document.getElementById("cart_items");
+      const totalPriceDiv = document.getElementById("total_price");
+
+      function updateTotalPrice() {
+        let total = 0;
+        for (let i = 0; i < cartItems.rows.length; i++) {
+          const row = cartItems.rows[i];
+          const totalCell = row.cells[4];
+          total += parseInt(totalCell.textContent.replace(/[^\d]/g, ""));
+        }
+        totalPriceDiv.textContent =
+          "Tổng đơn hàng: " + total.toLocaleString("vi-VN") + " VNĐ";
+      }
+
+      function createRow(name, price, image) {
+        const newRow = document.createElement("tr");
+
+        const productNameCell = document.createElement("td");
+        productNameCell.textContent = name;
+
+        const productImageCell = document.createElement("td");
+        const productImage = document.createElement("img");
+        productImage.src = image;
+        productImageCell.appendChild(productImage);
+
+        const priceCell = document.createElement("td");
+        priceCell.textContent = price.toLocaleString("vi-VN") + " VNĐ";
+
+        const quantityCell = document.createElement("td");
+        quantityCell.textContent = "1";
+
+        const totalPriceCell = document.createElement("td");
+        totalPriceCell.textContent = price.toLocaleString("vi-VN") + " VNĐ";
+
+        const editCell = document.createElement("td");
+        const addBtn = document.createElement("button");
+        addBtn.textContent = "Thêm";
+        addBtn.classList.add("add_btn");
+        const desBtn = document.createElement("button");
+        desBtn.textContent = "Giảm";
+        desBtn.classList.add("des_btn");
+        editCell.appendChild(addBtn);
+        editCell.appendChild(desBtn);
+
+        const deleteCell = document.createElement("td");
+        const deleteBtn = document.createElement("button");
+        deleteBtn.textContent = "Xóa";
+        deleteBtn.classList.add("delete_btn");
+        deleteCell.appendChild(deleteBtn);
+
+        newRow.appendChild(productNameCell);
+        newRow.appendChild(productImageCell);
+        newRow.appendChild(priceCell);
+        newRow.appendChild(quantityCell);
+        newRow.appendChild(totalPriceCell);
+        newRow.appendChild(editCell);
+        newRow.appendChild(deleteCell);
+
+        cartItems.appendChild(newRow);
+        updateTotalPrice();
+      }
+
+      document.querySelectorAll(".fa-cart-plus").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const name = btn.getAttribute("data-name");
+          const price = parseInt(btn.getAttribute("data-price"));
+          const image = btn.getAttribute("data-image");
+
+          let found = false;
+          for (let i = 0; i < cartItems.rows.length; i++) {
+            const row = cartItems.rows[i];
+            if (row.cells[0].textContent === name) {
+              const quantityCell = row.cells[3];
+              const currentQuantity = parseInt(quantityCell.textContent);
+              quantityCell.textContent = currentQuantity + 1;
+
+              const totalPriceCell = row.cells[4];
+              totalPriceCell.textContent =
+                ((currentQuantity + 1) * price).toLocaleString("vi-VN") +
+                " VNĐ";
+
+              found = true;
+              break;
+            }
+          }
+
+          if (!found) {
+            createRow(name, price, image);
+          } else {
+            updateTotalPrice();
+          }
+        });
+      });
+
+      cartItems.addEventListener("click", function (event) {
+        const row = event.target.closest("tr");
+        if (!row) return;
+
+        const quantityCell = row.cells[3];
+        const totalPriceCell = row.cells[4];
+        const unitPrice = parseInt(
+          row.cells[2].textContent.replace(/[^\d]/g, "")
+        );
+
+        if (event.target.classList.contains("add_btn")) {
+          let quantity = parseInt(quantityCell.textContent);
+          quantityCell.textContent = quantity + 1;
+          totalPriceCell.textContent =
+            ((quantity + 1) * unitPrice).toLocaleString("vi-VN") + " VNĐ";
+          updateTotalPrice();
+        }
+
+        if (event.target.classList.contains("des_btn")) {
+          let quantity = parseInt(quantityCell.textContent);
+          if (quantity > 1) {
+            quantityCell.textContent = quantity - 1;
+            totalPriceCell.textContent =
+              ((quantity - 1) * unitPrice).toLocaleString("vi-VN") + " VNĐ";
+          } else {
+            row.remove();
+          }
+          updateTotalPrice();
+        }
+
+        if (event.target.classList.contains("delete_btn")) {
+          row.remove();
+          updateTotalPrice();
+        }
+      });
+
+      const viewCartBtn = document.getElementById("view_cart");
+      const cartPopup = document.getElementById("cart_popup");
+      const closeCartBtn = document.getElementById("close_cart");
+      const body = document.querySelector("body");
+
+      viewCartBtn.addEventListener("click", () => {
+        cartPopup.style.display = "flex";
+        body.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
+        body.style.overflow = "hidden";
+      });
+
+      closeCartBtn.addEventListener("click", () => {
+        cartPopup.style.display = "none";
+        body.style.backgroundColor = "white";
+        body.style.overflow = "auto";
+      });
+
+      window.addEventListener("click", function (event) {
+        if (event.target === cartPopup) {
+          cartPopup.style.display = "none";
+          body.style.backgroundColor = "white";
+          body.style.overflow = "auto";
+        }
+      });
+      const like_icons = document.querySelectorAll(".like-product");
+      like_icons.forEach((icon) => {
+        icon.addEventListener("click", () => {
+          if (icon.classList.contains("far")) {
+            icon.classList.remove("far");
+            icon.classList.add("fas");
+            icon.style.color = "#e74c3c";
+          } else {
+            icon.classList.remove("fas");
+            icon.classList.add("far");
+            icon.style.color = "";
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
