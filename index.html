@@ -33,7 +33,9 @@
           <div class="header-icons">
             <a href="/HTML/account.html" class="account"
               ><i class="fas fa-user"></i
-            ></a>
+            >
+              <span class="account-name">Tài khoản</span>
+            </li></a>
             <a href="/HTML/wishlist.html" class="wishlist"
               ><i class="fas fa-heart"></i
             ></a>
@@ -41,14 +43,6 @@
               <i class="fas fa-shopping-cart"></i>
               <span class="cart-count">0</span>
             </a>
-          </div>
-          <div id="login-or-res">
-            <a href="/HTML/login.html" class="login"
-              ><i class="fas fa-sign-in-alt"></i> Đăng nhập</a
-            >
-            <a href="/HTML/register.html" class="register"
-              ><i class="fas fa-user-plus"></i> Đăng ký</a
-            >
           </div>
         </div>
 
@@ -102,6 +96,12 @@
               <h1>Perfect Grade - Đỉnh Cao Mô Hình</h1>
               <p>Trải nghiệm mô hình chi tiết nhất với tỷ lệ 1/60</p>
               <a href="/HTML/category.html?type=pg" class="btn">Khám phá</a>
+            </div>
+            <div class="slide-content">
+              <h1>Real Grade - Chi Tiết Từng Chi Tiết</h1>
+              <p>Khám phá mô hình với chi tiết tinh xảo và tỷ lệ 1/144</p>
+              <a href="/HTML/category.html?type=rg" class="btn">Khám phá</a>
+
             </div>
           </div>
         </div>
@@ -245,19 +245,27 @@
     </footer>
     <script src="/JavaScript/script.js"></script>
     <script>
-      //Hide login and register until user mouse in .account
-      document.addEventListener("DOMContentLoaded", function () {
-        const accountIcon = document.querySelector(".header-icons .account");
-        const loginOrRes = document.getElementById("login-or-res");
-
-        accountIcon.addEventListener("mouseover", function () {
-          loginOrRes.style.display = "block";
+      //Banner slider functionality
+      const slides = document.querySelectorAll('.slide');
+      const prevButton = document.querySelector('.prev-slide');
+      const nextButton = document.querySelector('.next-slide');
+      let currentSlide = 0;
+      function showSlide(index) {
+        slides.forEach((slide, i) => {
+          slide.classList.toggle('active', i === index);
         });
-
-        accountIcon.addEventListener("mouseout", function () {
-          loginOrRes.style.display = "none";
-        });
-      });
+      }
+      function nextSlide() {
+        currentSlide = (currentSlide + 1) % slides.length;
+        showSlide(currentSlide);
+      }
+      function prevSlide() {
+        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+        showSlide(currentSlide);
+      }
+      nextButton.addEventListener('click', nextSlide);
+      prevButton.addEventListener('click', prevSlide);
+      showSlide(currentSlide);
     </script>
   </body>
 </html>
