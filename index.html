@@ -84,6 +84,7 @@
               <a href="/HTML/products.html" class="btn">Mua ngay</a>
             </div>
           </div>
+
         </div>
         <div
           class="slide"
@@ -97,13 +98,36 @@
               <p>Trải nghiệm mô hình chi tiết nhất với tỷ lệ 1/60</p>
               <a href="/HTML/category.html?type=pg" class="btn">Khám phá</a>
             </div>
+          </div>
+        </div>
+        <div class="slide">
+          <div class="container">
             <div class="slide-content">
               <h1>Real Grade - Chi Tiết Từng Chi Tiết</h1>
               <p>Khám phá mô hình với chi tiết tinh xảo và tỷ lệ 1/144</p>
               <a href="/HTML/category.html?type=rg" class="btn">Khám phá</a>
-
             </div>
           </div>
+        </div>
+        <div class="slide">
+          <div class="container">
+            <div class="slide-content">
+              <h1>Master Grade - Tỷ Lệ 1/100</h1>
+              <p>Trải nghiệm mô hình với chi tiết cao và khả năng tùy chỉnh</p>
+              <a href="/HTML/category.html?type=mg" class="btn">Khám phá</a>
+            </div>
+          </div>
+
+        </div>
+        <div class="slide">
+          <div class="container">
+            <div class="slide-content">
+              <h1>High Grade - Tỷ Lệ 1/144</h1>
+              <p>Khám phá mô hình dễ lắp ráp với chi tiết tốt</p>
+              <a href="/HTML/category.html?type=hg" class="btn">Khám phá</a>
+            </div>
+          </div>
+
         </div>
       </div>
       <div class="slider-controls">
@@ -244,28 +268,6 @@
       </div>
     </footer>
     <script src="/JavaScript/script.js"></script>
-    <script>
-      //Banner slider functionality
-      const slides = document.querySelectorAll('.slide');
-      const prevButton = document.querySelector('.prev-slide');
-      const nextButton = document.querySelector('.next-slide');
-      let currentSlide = 0;
-      function showSlide(index) {
-        slides.forEach((slide, i) => {
-          slide.classList.toggle('active', i === index);
-        });
-      }
-      function nextSlide() {
-        currentSlide = (currentSlide + 1) % slides.length;
-        showSlide(currentSlide);
-      }
-      function prevSlide() {
-        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-        showSlide(currentSlide);
-      }
-      nextButton.addEventListener('click', nextSlide);
-      prevButton.addEventListener('click', prevSlide);
-      showSlide(currentSlide);
-    </script>
+    <script src="/JavaScript/index.js"></script>
   </body>
 </html>
