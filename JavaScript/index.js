@@ -1,4 +1,3 @@
-//Banner slider functionality
 const slides = document.querySelectorAll(".slide");
 const prevButton = document.querySelector(".prev-slide");
 const nextButton = document.querySelector(".next-slide");
