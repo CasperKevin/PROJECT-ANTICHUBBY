@@ -21,6 +21,7 @@
               <img
                 src="IMG/LOGO-removebg-preview.png"
                 alt="Gundam Store Logo"
+                
               />
             </a>
           </div>
@@ -74,61 +75,29 @@
         <div
           class="slide active"
           style="
-            background-image: url('https://via.placeholder.com/1920x600?text=Gundam+Collection+2023');
+            background-image: url('IMG/banner.webp');
           "
         >
           <div class="container">
             <div class="slide-content">
-              <h1>Bộ Sưu Tập Gundam 2023</h1>
+              <h1>Bộ Sưu Tập Gundam 2025</h1>
               <p>Khám phá các mẫu mô hình mới nhất từ Bandai</p>
               <a href="/HTML/products.html" class="btn">Mua ngay</a>
             </div>
           </div>
-
         </div>
         <div
           class="slide"
           style="
-            background-image: url('https://via.placeholder.com/1920x600?text=Perfect+Grade+Series');
-          "
-        >
-          <div class="container">
-            <div class="slide-content">
-              <h1>Perfect Grade - Đỉnh Cao Mô Hình</h1>
-              <p>Trải nghiệm mô hình chi tiết nhất với tỷ lệ 1/60</p>
-              <a href="/HTML/category.html?type=pg" class="btn">Khám phá</a>
-            </div>
-          </div>
+            background-image: url('IMG/pg-banner.webp');
+          ">
         </div>
-        <div class="slide">
-          <div class="container">
-            <div class="slide-content">
-              <h1>Real Grade - Chi Tiết Từng Chi Tiết</h1>
-              <p>Khám phá mô hình với chi tiết tinh xảo và tỷ lệ 1/144</p>
-              <a href="/HTML/category.html?type=rg" class="btn">Khám phá</a>
-            </div>
+        <div class="slide" style="background-image: url('IMG/rg-banner.webp');">
           </div>
-        </div>
-        <div class="slide">
-          <div class="container">
-            <div class="slide-content">
-              <h1>Master Grade - Tỷ Lệ 1/100</h1>
-              <p>Trải nghiệm mô hình với chi tiết cao và khả năng tùy chỉnh</p>
-              <a href="/HTML/category.html?type=mg" class="btn">Khám phá</a>
-            </div>
+        <div class="slide" style="background-image: url('IMG/mg-banner.jpg');">
           </div>
-
-        </div>
-        <div class="slide">
-          <div class="container">
-            <div class="slide-content">
-              <h1>High Grade - Tỷ Lệ 1/144</h1>
-              <p>Khám phá mô hình dễ lắp ráp với chi tiết tốt</p>
-              <a href="/HTML/category.html?type=hg" class="btn">Khám phá</a>
-            </div>
+        <div class="slide" style="background-image: url('IMG/hg-banner.webp');">
           </div>
-
-        </div>
       </div>
       <div class="slider-controls">
         <button class="prev-slide"><i class="fas fa-chevron-left"></i></button>
@@ -268,6 +237,28 @@
       </div>
     </footer>
     <script src="/JavaScript/script.js"></script>
-    <script src="/JavaScript/index.js"></script>
+    <script>
+      //Banner slider functionality
+      const slides = document.querySelectorAll('.slide');
+      const prevButton = document.querySelector('.prev-slide');
+      const nextButton = document.querySelector('.next-slide');
+      let currentSlide = 0;
+      function showSlide(index) {
+        slides.forEach((slide, i) => {
+          slide.classList.toggle('active', i === index);
+        });
+      }
+      function nextSlide() {
+        currentSlide = (currentSlide + 1) % slides.length;
+        showSlide(currentSlide);
+      }
+      function prevSlide() {
+        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+        showSlide(currentSlide);
+      }
+      nextButton.addEventListener('click', nextSlide);
+      prevButton.addEventListener('click', prevSlide);
+      showSlide(currentSlide);
+    </script>
   </body>
 </html>
