@@ -1,35 +1,30 @@
 // ====================
-// GLOBAL VARIABLES
+// Global Variables
 // ====================
+const currentUser = JSON.parse(localStorage.getItem("currentUser")) || null;
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
+let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
 
 // ====================
-// DOM ELEMENTS
+// DOM Elements
 // ====================
-const cartTable = document.getElementById("cart_items");
-const summaryRows = document.querySelectorAll(".summary-row span:last-child");
-const checkoutBtn = document.querySelector(".checkout-btn");
+const loginBtn = document.getElementById("loginBtn");
+const registerBtn = document.getElementById("registerBtn");
+const logoutBtn = document.getElementById("logoutBtn");
+const loginModal = document.getElementById("loginModal");
+const registerModal = document.getElementById("registerModal");
+const closeModals = document.querySelectorAll(".close-modal");
+const showRegister = document.getElementById("showRegister");
+const showLogin = document.getElementById("showLogin");
+const authButtons = document.getElementById("authButtons");
+const userInfo = document.getElementById("userInfo");
+const usernameDisplay = document.getElementById("usernameDisplay");
+const cartCount = document.querySelector(".cart-count");
+const cartIcon = document.getElementById("cartIcon");
 
 // ====================
-// CORE FUNCTIONS
+// Utility Functions
 // ====================
-function initCart() {
-  renderCartTable();
-  updateCartCount();
-  setupCartEvents();
-}
-
-function getCart() {
-  return JSON.parse(localStorage.getItem("cart")) || [];
-}
-
-function saveCart(cart) {
-  localStorage.setItem("cart", JSON.stringify(cart));
-  updateCartCount();
-  // Kích hoạt sự kiện để các tab khác cập nhật
-  window.dispatchEvent(new Event("storage"));
-}
-
 function formatPrice(price) {
   return new Intl.NumberFormat("vi-VN", {
     style: "currency",
@@ -37,31 +32,43 @@ function formatPrice(price) {
   }).format(price);
 }
 
+function showNotification(message, type = "success") {
+  const notification = document.createElement("div");
+  notification.className = `notification ${type}`;
+  notification.textContent = message;
+  document.body.appendChild(notification);
+
+  setTimeout(() => {
+    notification.classList.add("show");
+  }, 10);
+
+  setTimeout(() => {
+    notification.classList.remove("show");
+    setTimeout(() => {
+      document.body.removeChild(notification);
+    }, 300);
+  }, 3000);
+}
+
 // ====================
-// RENDER CART
+// Cart Page Integration
 // ====================
 function renderCartTable() {
+  const cartTable = document.getElementById("cart_items");
+  const summaryRows = document.querySelectorAll(".summary-row span:last-child");
+
   if (!cartTable) return;
 
-  cart = getCart();
   cartTable.innerHTML = "";
 
   if (cart.length === 0) {
-    cartTable.innerHTML = `
-      <tr>
-        <td colspan="7" class="empty-cart">
-          <i class="fas fa-shopping-cart"></i>
-          <p>Giỏ hàng trống!</p>
-          <a href="products.html" class="btn">Mua sắm ngay</a>
-        </td>
-      </tr>
-    `;
-    summaryRows.forEach((el) => (el.textContent = formatPrice(0)));
-    checkoutBtn.style.display = "none";
+    cartTable.innerHTML = `<tr><td colspan="7" style="text-align:center;">Giỏ hàng trống!</td></tr>`;
+    summaryRows.forEach((el) => (el.textContent = "0đ"));
     return;
   }
 
   let subtotal = 0;
+
   cart.forEach((item) => {
     const itemTotal = item.price * item.quantity;
     subtotal += itemTotal;
@@ -72,30 +79,19 @@ function renderCartTable() {
       <td><img src="${item.image}" alt="${item.name}" width="80"></td>
       <td>${formatPrice(item.price)}</td>
       <td>
-        <input 
-          type="number" 
-          value="${item.quantity}" 
-          min="1" 
-          data-id="${item.id}" 
-          class="update-qty"
-        >
+        <input type="number" value="${item.quantity}" min="1" data-id="${
+      item.id
+    }" class="update-qty">
       </td>
       <td>${formatPrice(itemTotal)}</td>
-      <td>
-        <button data-id="${item.id}" class="btn update-btn">
-          <i class="fas fa-sync-alt"></i>
-        </button>
-      </td>
-      <td>
-        <button data-id="${item.id}" class="btn remove-btn">
-          <i class="fas fa-trash"></i>
-        </button>
-      </td>
+      <td><button data-id="${
+        item.id
+      }" class="btn update-btn">Cập nhật</button></td>
+      <td><button data-id="${item.id}" class="btn remove-btn">Xóa</button></td>
     `;
     cartTable.appendChild(row);
   });
 
-  // Tính tổng đơn hàng
   const shipping = 30000;
   const discount = 0;
   const total = subtotal + shipping - discount;
@@ -104,77 +100,48 @@ function renderCartTable() {
   summaryRows[1].textContent = formatPrice(shipping);
   summaryRows[2].textContent = formatPrice(discount);
   summaryRows[3].textContent = formatPrice(total);
-  checkoutBtn.style.display = "block";
 }
 
-// ====================
-// EVENT HANDLERS
-// ====================
-function setupCartEvents() {
-  // Xóa sản phẩm
-  document.addEventListener("click", (e) => {
-    if (e.target.closest(".remove-btn")) {
-      const id = parseInt(e.target.closest(".remove-btn").dataset.id);
-      cart = cart.filter((item) => item.id !== id);
-      saveCart(cart);
-      renderCartTable();
-      showNotification("Đã xóa sản phẩm!", "success");
+document.addEventListener("click", (e) => {
+  if (e.target.classList.contains("remove-btn")) {
+    const id = parseInt(e.target.dataset.id);
+    cart = cart.filter((item) => item.id !== id);
+    localStorage.setItem("cart", JSON.stringify(cart));
+    renderCartTable();
+  }
+});
+
+document.addEventListener("click", (e) => {
+  if (e.target.classList.contains("update-btn")) {
+    const id = parseInt(e.target.dataset.id);
+    const qtyInput = document.querySelector(`input[data-id='${id}']`);
+    const newQty = parseInt(qtyInput.value);
+
+    if (isNaN(newQty) || newQty <= 0) {
+      showNotification("Vui lòng nhập số lượng hợp lệ", "error");
+      return;
     }
 
-    // Cập nhật số lượng
-    if (e.target.closest(".update-btn")) {
-      const id = parseInt(e.target.closest(".update-btn").dataset.id);
-      const qtyInput = document.querySelector(`.update-qty[data-id="${id}"]`);
-      const newQty = parseInt(qtyInput.value);
+    const item = cart.find((p) => p.id === id);
+    if (item) item.quantity = newQty;
+    localStorage.setItem("cart", JSON.stringify(cart));
+    renderCartTable();
+  }
+});
 
-      if (isNaN(newQty) || newQty < 1) {
-        showNotification("Số lượng không hợp lệ!", "error");
-        qtyInput.value = 1;
-        return;
-      }
+document.addEventListener("DOMContentLoaded", () => {
+  checkAuthStatus();
+  updateCartCount();
 
-      const item = cart.find((item) => item.id === id);
-      if (item) item.quantity = newQty;
-      saveCart(cart);
-      renderCartTable();
-      showNotification("Đã cập nhật số lượng!", "success");
-    }
-  });
+  const cartTable = document.getElementById("cart_items");
+  if (cartTable) {
+    renderCartTable();
+  }
+});
 
-  // Cập nhật giỏ hàng khi có thay đổi từ trang khác
-  window.addEventListener("storage", () => {
+window.addEventListener("storage", () => {
+  if (document.querySelector(".cart-section")) {
     cart = JSON.parse(localStorage.getItem("cart")) || [];
     renderCartTable();
-  });
-}
-
-// ====================
-// UTILITIES
-// ====================
-function updateCartCount() {
-  const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-  document.querySelectorAll(".cart-count").forEach((el) => {
-    el.textContent = totalItems;
-  });
-}
-
-function showNotification(message, type) {
-  const notification = document.createElement("div");
-  notification.className = `notification ${type}`;
-  notification.innerHTML = `
-    <i class="fas fa-${type === "success" ? "check" : "exclamation"}"></i>
-    ${message}
-  `;
-  document.body.appendChild(notification);
-
-  setTimeout(() => notification.classList.add("show"), 10);
-  setTimeout(() => {
-    notification.classList.remove("show");
-    setTimeout(() => notification.remove(), 300);
-  }, 3000);
-}
-
-// ====================
-// INITIALIZE
-// ====================
-document.addEventListener("DOMContentLoaded", initCart);
+  }
+});
