@@ -51,7 +51,6 @@ sortSelect.addEventListener("change", function () {
     if (sortValue === "bestseller") return b.dataset.sales - a.dataset.sales;
     return 0;
   });
-  kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkikaZ;
   const productsList = document.querySelector(".products-list");
   productsList.innerHTML = "";
   sortedProducts.forEach((product) => productsList.appendChild(product));
