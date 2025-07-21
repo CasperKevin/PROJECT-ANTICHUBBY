@@ -1,0 +1,179 @@
+/* ==================== */
+/* Contact Page Styles */
+/* ==================== */
+.contact-section {
+  padding: 60px 0;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+}
+
+.contact-info h2 {
+  font-size: 28px;
+  margin-bottom: 20px;
+  color: #1a1a2e;
+}
+
+.contact-info p {
+  margin-bottom: 30px;
+  line-height: 1.8;
+}
+
+.info-item {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.info-item i {
+  font-size: 20px;
+  color: #e63946;
+  margin-top: 5px;
+}
+
+.info-content h3 {
+  font-size: 18px;
+  margin-bottom: 5px;
+  color: #1a1a2e;
+}
+
+.info-content p {
+  margin-bottom: 5px;
+  font-size: 15px;
+  color: #6c757d;
+}
+
+.social-links h3 {
+  font-size: 18px;
+  margin-bottom: 15px;
+  color: #1a1a2e;
+}
+
+.social-icons {
+  display: flex;
+  gap: 15px;
+}
+
+.social-icons a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background-color: #f8f9fa;
+  border-radius: 50%;
+  color: #1a1a2e;
+  transition: all 0.3s ease;
+}
+
+.social-icons a:hover {
+  background-color: #e63946;
+  color: white;
+}
+
+.contact-form h2 {
+  font-size: 28px;
+  margin-bottom: 20px;
+  color: #1a1a2e;
+}
+
+.contact-form .form-group {
+  margin-bottom: 20px;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: #e63946;
+  outline: none;
+}
+
+.contact-form textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.map-section {
+  padding: 0 0 60px;
+}
+
+.map-container {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.faq-section {
+  padding: 60px 0;
+  background-color: #f8f9fa;
+}
+
+.faq-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.faq-item {
+  margin-bottom: 15px;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+
+.faq-question {
+  width: 100%;
+  padding: 20px;
+  text-align: left;
+  background-color: white;
+  border: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 500;
+  color: #1a1a2e;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.faq-question:hover {
+  background-color: #f8f9fa;
+}
+
+.faq-question i {
+  transition: transform 0.3s ease;
+}
+
+.faq-question.active i {
+  transform: rotate(180deg);
+}
+
+.faq-answer {
+  padding: 0 20px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, padding 0.3s ease;
+}
+
+.faq-answer p {
+  padding-bottom: 20px;
+  line-height: 1.8;
+}
+
+.faq-item.active .faq-answer {
+  max-height: 500px;
+  padding: 0 20px 20px;
+}
