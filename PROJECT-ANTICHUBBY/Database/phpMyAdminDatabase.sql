@@ -159,7 +159,27 @@ VALUES
 ('RX-78-2 Gundam HG', 1, 1, 350000, 20, 'rx78-hg.jpg', 'Phiên bản HG của Gundam huyền thoại'),
 ('Freedom Gundam MG', 2, 1, 850000, 15, 'freedom-mg.jpg', 'Freedom Gundam với chi tiết cực cao'),
 ('Strike Freedom RG', 3, 1, 980000, 10, 'strike-rg.jpg', 'Phiên bản RG sắc sảo và chi tiết'),
-('Unicorn Gundam PG', 4, 1, 3500000, 5, 'unicorn-pg.jpg', 'Phiên bản PG chuyển đổi Destroy Mode');
+('Unicorn Gundam PG', 4, 1, 3500000, 5, 'unicorn-pg.jpg', 'Phiên bản PG chuyển đổi Destroy Mode'),
+('Wing Gundam Zero HG', 1, 1, 380000, 18, 'wing-zero-hg.jpg', 'Phiên bản HG của Wing Gundam Zero với cánh đẹp'),
+('Zaku II HG', 1, 1, 320000, 25, 'zaku-hg.jpg', 'Mobile suit cổ điển của Zeon'),
+('Barbatos Lupus HG', 1, 1, 400000, 15, 'barbatos-hg.jpg', 'Gundam từ series Iron-Blooded Orphans'),
+('Nu Gundam MG', 2, 1, 950000, 12, 'nu-gundam-mg.jpg', 'Phiên bản MG với fin funnel chi tiết'),
+('Sazabi MG', 2, 1, 1100000, 8, 'sazabi-mg.jpg', 'Mobile suit khổng lồ của Char Aznable'),
+('Strike Gundam MG', 2, 1, 880000, 10, 'strike-mg.jpg', 'Gundam chính từ SEED với nhiều vũ khí'),
+('Exia RG', 3, 1, 1020000, 9, 'exia-rg.jpg', 'RG với khớp nối linh hoạt và chi tiết GN Drive'),
+('Zaku II RG', 3, 1, 920000, 12, 'zaku-rg.jpg', 'Phiên bản RG của mobile suit huyền thoại'),
+('Tallgeese RG', 3, 1, 980000, 7, 'tallgeese-rg.jpg', 'Mobile suit mạnh mẽ từ Wing'),
+('Astray Red Frame PG', 4, 1, 3800000, 4, 'astray-pg.jpg', 'PG với thanh kiếm khổng lồ và khung xương chi tiết'),
+('Gundam Mk-II HG', 1, 1, 360000, 20, 'mk2-hg.jpg', 'Phiên bản HG của Gundam Mk-II từ Zeta'),
+('Gouf Custom HG', 1, 1, 340000, 15, 'gouf-hg.jpg', 'Mobile suit đặc biệt với heat rod'),
+('Death Scythe HG', 1, 1, 370000, 12, 'deathscythe-hg.jpg', 'Gundam với lưỡi hái tử thần từ Wing'),
+('Heavyarms MG', 2, 1, 900000, 8, 'heavyarms-mg.jpg', 'MG với nhiều vũ khí và đạn dược'),
+('Sandrock MG', 2, 1, 870000, 7, 'sandrock-mg.jpg', 'Gundam sa mạc từ series Wing'),
+('Sinaju MG', 2, 1, 1200000, 6, 'sinaju-mg.jpg', 'Mobile suit đỏ của Full Frontal'),
+('Wing Gundam Zero RG', 3, 1, 1050000, 5, 'wing-zero-rg.jpg', 'Phiên bản RG với cánh thiên thần'),
+('Gundam GP01 RG', 3, 1, 950000, 8, 'gp01-rg.jpg', 'Gundam từ 0083 Stardust Memory'),
+('Banshee PG', 4, 1, 3700000, 3, 'banshee-pg.jpg', 'Phiên bản PG của Banshee với Destroy Mode'),
+('Strike Freedom PG', 4, 1, 4000000, 2, 'strike-freedom-pg.jpg', 'Phiên bản PG với hệ thống DRAGOON');
 -- Giỏ hàng
 INSERT INTO GioHang (maNguoiDung)
 VALUES (2), (3);
