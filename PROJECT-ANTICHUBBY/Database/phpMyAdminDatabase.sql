@@ -1,4 +1,5 @@
 -- Bảng NguoiDung
+Use 
 CREATE TABLE NguoiDung (
     maNguoiDung INT AUTO_INCREMENT PRIMARY KEY,
     hoTen VARCHAR(100) NOT NULL,

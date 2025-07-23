@@ -1,28 +1,6 @@
 <?php
-/* ----- config.php ----- */
-// Place this file in a 'config' folder
-
-$host   = 'localhost';
-$dbname = 'your_database_name';    // change to your DB name
-$user   = 'your_username';         // change to your DB user
-$pass   = 'your_password';         // change to your DB password
-$charset = 'utf8mb4';
-
-$dsn = "mysql:host=$host;dbname=$dbname;charset=$charset";
-$options = [
-    PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
-    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-    PDO::ATTR_EMULATE_PREPARES   => false,
-];
-try {
-    $pdo = new PDO($dsn, $user, $pass, $options);
-} catch (PDOException $e) {
-    throw new PDOException($e->getMessage(), (int)$e->getCode());
-}
 
 /* ----- product.php ----- */
-// Place at your web root. Handles list/add/edit/delete based on `action` param
-
 require_once __DIR__ . '/config/config.php';
 
 action:
