@@ -89,8 +89,8 @@
                   <i class="fas fa-camera"></i>
                 </button>
               </div>
-              <h3>Nguyễn Văn A</h3>
-              <p>Thành viên từ: 15/10/2022</p>
+              <h3></h3>
+              <p></p>
             </div>
 
             <nav class="account-menu">
@@ -129,119 +129,84 @@
             </nav>
           </aside>
 
-          <!-- Account Main Content -->
-          <div class="account-content">
-            <h2 class="content-title">Thông Tin Tài Khoản</h2>
+<!-- Account Main Content -->
+<div class="account-content">
+  <h2 class="content-title">Thông Tin Tài Khoản</h2>
 
-            <form class="account-form">
-              <div class="form-row">
-                <div class="form-group">
-                  <label>Họ và tên</label>
-                  <input type="text" value="Nguyễn Văn A" />
-                </div>
-                <div class="form-group">
-                  <label>Số điện thoại</label>
-                  <input type="tel" value="0909123456" />
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label>Email</label>
-                <input type="email" value="nguyenvana@gmail.com" disabled />
-                <span class="note">Email không thể thay đổi</span>
-              </div>
-
-              <div class="form-group">
-                <label>Ngày sinh</label>
-                <div class="birthday-fields">
-                  <select>
-                    <option value="">Ngày</option>
-                    <!-- Options for days -->
-                  </select>
-                  <select>
-                    <option value="">Tháng</option>
-                    <!-- Options for months -->
-                  </select>
-                  <select>
-                    <option value="">Năm</option>
-                    <!-- Options for years -->
-                  </select>
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label>Giới tính</label>
-                <div class="radio-group">
-                  <label
-                    ><input type="radio" name="gender" checked /> Nam</label
-                  >
-                  <label><input type="radio" name="gender" /> Nữ</label>
-                  <label><input type="radio" name="gender" /> Khác</label>
-                </div>
-              </div>
-
-              <button type="submit" class="btn">Cập nhật thông tin</button>
-            </form>
-
-            <div class="account-section-divider"></div>
-
-            <h3 class="content-subtitle">Địa Chỉ Mặc Định</h3>
-            <div class="default-address">
-              <p><strong>Nguyễn Văn A</strong> | 0909123456</p>
-              <p>123 Đường ABC, Phường XYZ, Quận 1, TP.HCM</p>
-              <div class="address-actions">
-                <a href="addresses.html" class="btn btn-outline"
-                  >Thay đổi địa chỉ</a
-                >
-              </div>
-            </div>
-
-            <div class="account-section-divider"></div>
-
-            <h3 class="content-subtitle">Đơn Hàng Gần Đây</h3>
-            <div class="recent-orders">
-              <div class="order-item">
-                <div class="order-header">
-                  <div class="order-id">
-                    Mã đơn hàng: <strong>#GUNDAM12345</strong>
-                  </div>
-                  <div class="order-date">Ngày đặt: 15/10/2023</div>
-                  <div class="order-status completed">Đã giao hàng</div>
-                  <div class="order-total">
-                    Tổng tiền: <strong>2,450,000đ</strong>
-                  </div>
-                </div>
-                <div class="order-products">
-                  <div class="product">
-                    <img
-                      src="https://via.placeholder.com/60x60?text=RG+Nu"
-                      alt="RG Nu Gundam"
-                    />
-                    <span>RG Nu Gundam x1</span>
-                  </div>
-                  <div class="product">
-                    <img
-                      src="https://via.placeholder.com/60x60?text=HG+Zaku"
-                      alt="HG Zaku"
-                    />
-                    <span>HG Zaku II x2</span>
-                  </div>
-                </div>
-                <div class="order-actions">
-                  <a href="order-detail.html" class="btn btn-outline"
-                    >Xem chi tiết</a
-                  >
-                  <a href="#" class="btn btn-outline">Mua lại</a>
-                </div>
-              </div>
-
-              <div class="view-all-orders">
-                <a href="orders.html" class="btn">Xem tất cả đơn hàng</a>
-              </div>
-            </div>
-          </div>
-        </div>
+  <form class="account-form">
+    <div class="form-row">
+      <div class="form-group">
+        <label for="fullname">Họ và tên</label>
+        <input id="fullname" type="text" name="fullname" value="" placeholder="Nhập họ và tên" />
       </div>
+      <div class="form-group">
+        <label for="phone">Số điện thoại</label>
+        <input id="phone" type="tel" name="phone" value="" placeholder="Nhập số điện thoại" />
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input id="email" type="email" name="email" value="" disabled />
+      <span class="note">Email không thể thay đổi</span>
+    </div>
+
+    <div class="form-group">
+      <label>Ngày sinh</label>
+      <div class="birthday-fields">
+        <select name="birth_day">
+          <option value="">Ngày</option>
+          <!-- Options for days -->
+        </select>
+        <select name="birth_month">
+          <option value="">Tháng</option>
+          <!-- Options for months -->
+        </select>
+        <select name="birth_year">
+          <option value="">Năm</option>
+          <!-- Options for years -->
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Giới tính</label>
+      <div class="radio-group">
+        <label><input type="radio" name="gender" value="male" /> Nam</label>
+        <label><input type="radio" name="gender" value="female" /> Nữ</label>
+        <label><input type="radio" name="gender" value="other" /> Khác</label>
+      </div>
+    </div>
+
+    <button type="submit" class="btn">Cập nhật thông tin</button>
+  </form>
+
+  <div class="account-section-divider"></div>
+
+  <h3 class="content-subtitle">Địa Chỉ Mặc Định</h3>
+  <div class="default-address">
+    <p><strong></strong> | </p>
+    <p></p>
+    <div class="address-actions">
+      <a href="addresses.html" class="btn btn-outline">Thay đổi địa chỉ</a>
+    </div>
+  </div>
+
+  <div class="account-section-divider"></div>
+
+  <h3 class="content-subtitle">Đơn Hàng Gần Đây</h3>
+  <div class="recent-orders">
+    <!-- Các đơn hàng sẽ được load động từ CSDL -->
+    <div class="order-item">
+      ...
+    </div>
+
+    <div class="view-all-orders">
+      <a href="orders.html" class="btn">Xem tất cả đơn hàng</a>
+    </div>
+  </div>
+</div>
+
     </section>
     <!-- Footer -->
     <footer class="footer">
@@ -303,6 +268,9 @@
       </div>
     </footer>
 
-    <script src="/JavaScript/script.js"></script>
+    <script src="/JavaScript/auth.js"></script>
+    <script src="/JavaScript/account.js"></script>
+    
+    </script>
   </body>
 </html>
