@@ -476,6 +476,8 @@ img {
 .payment-methods {
   display: flex;
   gap: 10px;
+  width: 50px;
+  height: 40px;
 }
 
 /* Modal */
