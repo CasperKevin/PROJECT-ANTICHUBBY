@@ -11,20 +11,21 @@ const DATA_PATH = path.join(__dirname, "user.json");
 // Middleware
 app.use(cors());
 app.use(bodyParser.json());
-app.use(express.static(__dirname));
+app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(__dirname)); // to serve HTML and user.json
 
-// API: Ghi người dùng mới vào user.json
+// API: Register new user
 app.post("/register", (req, res) => {
   const newUser = req.body;
 
   fs.readFile(DATA_PATH, "utf-8", (err, data) => {
-    if (err) return res.status(500).send("Lỗi đọc file!");
+    if (err) return res.status(500).send("Error reading file");
 
     let users = [];
     try {
       users = JSON.parse(data);
     } catch {
-      return res.status(500).send("Lỗi phân tích JSON!");
+      return res.status(500).send("Invalid JSON");
     }
 
     newUser.user_id =
@@ -32,12 +33,42 @@ app.post("/register", (req, res) => {
     users.push(newUser);
 
     fs.writeFile(DATA_PATH, JSON.stringify(users, null, 2), (err) => {
-      if (err) return res.status(500).send("Lỗi ghi file!");
-      res.status(200).json({ message: "Đăng ký thành công!" });
+      if (err) return res.status(500).send("Error writing file");
+      res.status(200).json({ message: "Registered successfully" });
     });
   });
 });
 
+// API: Login
+app.post("/login", (req, res) => {
+  const { username, password } = req.body;
+
+  fs.readFile(DATA_PATH, "utf-8", (err, data) => {
+    if (err)
+      return res.status(500).send({ success: false, message: "Server error" });
+
+    let users = [];
+    try {
+      users = JSON.parse(data);
+    } catch {
+      return res.status(500).send({ success: false, message: "Invalid data" });
+    }
+
+    const user = users.find(
+      (u) =>
+        (u.username === username || u.email === username) &&
+        u.password === password
+    );
+
+    if (user) {
+      const { password, ...safeUser } = user;
+      return res.status(200).send({ success: true, user: safeUser });
+    }
+
+    res.status(401).send({ success: false, message: "Invalid credentials" });
+  });
+});
+
 app.listen(PORT, () => {
-  console.log(` Server đang chạy tại http://localhost:${PORT}`);
+  console.log(`Server running at http://localhost:${PORT}`);
 });

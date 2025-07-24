@@ -18,5 +18,15 @@
     "address": "456 Oak Avenue, Springfield, IL",
     "phone_number": "+1-555-5678",
     "user-rank": "silver"
+  },
+  {
+    "username": "Far_land",
+    "email": "kfrog1222@gmail.com",
+    "password": "1111",
+    "date_of_birth": "2006-02-03",
+    "address": "ằdawdawdawdawdaw",
+    "phone_number": "123124123123",
+    "user_rank": "user",
+    "user_id": 3
   }
 ]

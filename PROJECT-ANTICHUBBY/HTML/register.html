@@ -81,6 +81,14 @@
               required
             />
           </div>
+          <div class="form-group">
+            <label for="rank">Cấp bậc</label>
+            <select id="rank" name="user_rank" required>
+              <option value="user">Bronze</option>
+              <option value="vip">Silver</option>
+              <option value="admin">Gold</option>
+            </select>
+          </div>
           <button type="submit" class="btn">Đăng ký</button>
           <p class="form-footer">
             Đã có tài khoản? <a href="login.html">Đăng nhập ngay</a>
@@ -89,6 +97,6 @@
       </div>
     </section>
 
-    <script src="script.js"></script>
+    <script src="/public/script.js" defer></script>
   </body>
 </html>
