@@ -13,12 +13,12 @@
         <h2>Đăng ký tài khoản</h2>
         <form id="registerForm">
           <div class="form-group">
-            <label for="fullname">Họ và tên</label>
+            <label for="username">Tên đăng nhập</label>
             <input
               type="text"
-              id="fullname"
-              name="fullname"
-              placeholder="Nhập họ tên của bạn"
+              id="username"
+              name="username"
+              placeholder="Nhập tên đăng nhập"
               required
             />
           </div>
@@ -49,6 +49,35 @@
               id="confirmPassword"
               name="confirmPassword"
               placeholder="Nhập lại mật khẩu"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="date_of_birth">Ngày sinh</label>
+            <input
+              type="date"
+              id="date_of_birth"
+              name="date_of_birth"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="address">Địa chỉ</label>
+            <input
+              type="text"
+              id="address"
+              name="address"
+              placeholder="Nhập địa chỉ của bạn"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="phone_number">Số điện thoại</label>
+            <input
+              type="tel"
+              id="phone_number"
+              name="phone_number"
+              placeholder="Nhập số điện thoại"
               required
             />
           </div>

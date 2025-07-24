@@ -1,7 +1,7 @@
 let users = [];
 
 // 1. Tải dữ liệu user.json (đặt cùng thư mục với login.html)
-fetch("/data/user.json")
+fetch("user.json")
   .then((res) => res.json())
   .then((data) => {
     users = data;
