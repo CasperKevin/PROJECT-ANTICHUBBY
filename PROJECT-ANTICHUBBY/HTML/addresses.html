@@ -3,9 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Gundam Store - Mô Hình Gundam Chính Hãng</title>
+    <title>Địa Chỉ Của Tôi - Gundam Store</title>
     <link rel="stylesheet" href="/style.css" />
-    <link rel="stylesheet" href="/CSS/product.css" />
     <link rel="stylesheet" href="/CSS/address.css" />
     <link
       rel="stylesheet"
@@ -66,107 +65,17 @@
         </nav>
       </div>
     </header>
-    <!-- Page Header -->
-    <section class="page-header">
-      <div class="container">
-        <h1>Danh Sách Yêu Thích</h1>
-        <p>Các sản phẩm bạn đã lưu lại</p>
-      </div>
-    </section>
 
-    <!-- Wishlist Content -->
-    <section class="wishlist-section">
-      <div class="container">
-        <div class="wishlist-empty" id="wishlistEmpty">
-          <i class="far fa-heart"></i>
-          <h3>Danh sách yêu thích của bạn đang trống</h3>
-          <p>
-            Hãy bấm vào biểu tượng ♡ trên sản phẩm để thêm vào danh sách yêu
-            thích
-          </p>
-          <a href="products.html" class="btn">Tiếp tục mua sắm</a>
-        </div>
-
-        <div class="wishlist-items" id="wishlistItems">
-          <div class="wishlist-header">
-            <h3>Sản phẩm</h3>
-            <h3>Giá</h3>
-            <h3>Tình trạng</h3>
-            <h3>Hành động</h3>
-          </div>
-
-          <div class="wishlist-item">
-            <div class="product-info">
-              <img
-                src="https://via.placeholder.com/100x100?text=RG+Nu"
-                alt="RG Nu Gundam"
-              />
-              <div class="product-details">
-                <h4><a href="product-detail.html">RG Nu Gundam</a></h4>
-                <p>Mã: RG-11</p>
-                <button class="remove-item">Xóa</button>
-              </div>
-            </div>
-            <div class="product-price">1,200,000đ</div>
-            <div class="product-stock in-stock">Còn hàng</div>
-            <div class="product-actions">
-              <button class="btn add-to-cart">Thêm vào giỏ</button>
-            </div>
-          </div>
-
-          <div class="wishlist-item">
-            <div class="product-info">
-              <img
-                src="https://via.placeholder.com/100x100?text=MG+Exia"
-                alt="MG Exia"
-              />
-              <div class="product-details">
-                <h4><a href="product-detail.html">MG Exia</a></h4>
-                <p>Mã: MG-42</p>
-                <button class="remove-item">Xóa</button>
-              </div>
-            </div>
-            <div class="product-price">1,100,000đ</div>
-            <div class="product-stock pre-order">Hàng pre-order</div>
-            <div class="product-actions">
-              <button class="btn add-to-cart">Thêm vào giỏ</button>
-            </div>
-          </div>
-
-          <div class="wishlist-item">
-            <div class="product-info">
-              <img
-                src="https://via.placeholder.com/100x100?text=PG+Unicorn"
-                alt="PG Unicorn"
-              />
-              <div class="product-details">
-                <h4><a href="product-detail.html">PG Unicorn Gundam</a></h4>
-                <p>Mã: PG-07</p>
-                <button class="remove-item">Xóa</button>
-              </div>
-            </div>
-            <div class="product-price">6,500,000đ</div>
-            <div class="product-stock out-stock">Hết hàng</div>
-            <div class="product-actions">
-              <button class="btn btn-disabled" disabled>Hết hàng</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="wishlist-footer">
-          <button class="btn btn-outline">Tiếp tục mua sắm</button>
-          <button class="btn">Xóa tất cả</button>
-        </div>
-      </div>
-    </section>
-    <!-- Page Header -->
+    <!-- Địa chỉ cá nhân -->
     <section class="address-section">
-      <h2>Địa chỉ của tôi</h2>
-      <div class="address-box">
-        <p><strong>Tên:</strong> Nguyễn Văn A</p>
-        <p><strong>Số điện thoại:</strong> 0987654321</p>
-        <p><strong>Địa chỉ:</strong> 123 Đường ABC, Quận 1, TP.HCM</p>
-        <button onclick="editAddress()">Chỉnh sửa</button>
+      <div class="container">
+        <h2>Địa chỉ của tôi</h2>
+        <div class="address-box">
+          <p><strong>Tên:</strong> Nguyễn Văn A</p>
+          <p><strong>Số điện thoại:</strong> 0987654321</p>
+          <p><strong>Địa chỉ:</strong> 123 Đường ABC, Quận 1, TP.HCM</p>
+          <button onclick="editAddress()">Chỉnh sửa</button>
+        </div>
       </div>
     </section>
 
@@ -185,64 +94,31 @@
     <!-- Footer -->
     <footer class="footer">
       <div class="container">
-        <div class="footer-grid">
-          <div class="footer-col">
-            <h3>Gundam Store</h3>
-            <p>
-              Chuyên cung cấp các mẫu mô hình Gundam chính hãng từ Bandai Nhật
-              Bản.
-            </p>
-            <div class="social-links">
-              <a href="#"><i class="fab fa-facebook-f"></i></a>
-              <a href="#"><i class="fab fa-instagram"></i></a>
-              <a href="#"><i class="fab fa-youtube"></i></a>
-            </div>
-          </div>
-          <div class="footer-col">
-            <h3>Thông tin</h3>
-            <ul>
-              <li><a href="/HTML/about.html">Về chúng tôi</a></li>
-              <li><a href="/HTML/blog.html">Blog</a></li>
-              <li><a href="/HTML/contact.html">Liên hệ</a></li>
-              <li><a href="/HTML/policy.html">Chính sách bảo mật</a></li>
-            </ul>
-          </div>
-          <div class="footer-col">
-            <h3>Hỗ trợ</h3>
-            <ul>
-              <li><a href="/HTML/faq.html">Câu hỏi thường gặp</a></li>
-              <li><a href="/HTML/shipping.html">Vận chuyển</a></li>
-              <li><a href="/HTML/return.html">Đổi trả</a></li>
-              <li><a href="/HTML/payment.html">Thanh toán</a></li>
-            </ul>
-          </div>
-          <div class="footer-col">
-            <h3>Liên hệ</h3>
-            <ul class="contact-info">
-              <li>
-                <i class="fas fa-map-marker-alt"></i> Đường Võ Thị Sáu, Phường Thống Nhất, Biên Hòa, Đồng Nai
-              </li>
-              <li><i class="fas fa-phone"></i> (090) 926 4319</li>
-              <li><i class="fas fa-envelope"></i> GunplaVN@gmail.com</li>
-            </ul>
-          </div>
-        </div>
-        <div class="footer-bottom">
-          <p>&copy; 2025 Gundam Store. All rights reserved.</p>
-          <div class="payment-methods">
-            <img src="/IMG/Visa.png" alt="Visa" />
-            <img
-              src="/IMG/master-card-icon-4.png"
-              alt="Mastercard"
-            />
-            <img src="/IMG/mbbank-logo-5.png" alt="MBBank" />
-            <img src="/IMG/momo.webp" alt="MOMO" />
-          </div>
-        </div>
+        <p>&copy; 2025 Gundam Store. All rights reserved.</p>
       </div>
     </footer>
 
+    <script>
+      function editAddress() {
+        document.getElementById("addressModal").style.display = "block";
+      }
+      function closeModal() {
+        document.getElementById("addressModal").style.display = "none";
+      }
+      function saveAddress() {
+        const name = document.getElementById("nameInput").value;
+        const phone = document.getElementById("phoneInput").value;
+        const address = document.getElementById("addressInput").value;
 
-    <script src="/JavaScript/script.js"></script>
+        const box = document.querySelector(".address-box");
+        box.innerHTML = `
+          <p><strong>Tên:</strong> ${name}</p>
+          <p><strong>Số điện thoại:</strong> ${phone}</p>
+          <p><strong>Địa chỉ:</strong> ${address}</p>
+          <button onclick="editAddress()">Chỉnh sửa</button>
+        `;
+        closeModal();
+      }
+    </script>
   </body>
 </html>

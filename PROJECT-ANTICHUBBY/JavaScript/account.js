@@ -1,53 +1,73 @@
-let currentUser = null;
+// account.js
+
 function getCurrentUser() {
   const user = localStorage.getItem("currentUser");
-  if (user) {
-    currentUser = JSON.parse(user);
-  }
-  return currentUser;
+  return user ? JSON.parse(user) : null;
 }
-function saveCurrentUser(user) {
-  currentUser = user;
-  localStorage.setItem("currentUser", JSON.stringify(user));
-}
+
 function clearCurrentUser() {
-  currentUser = null;
   localStorage.removeItem("currentUser");
+  location.reload();
 }
-function isLoggedIn() {
-  return currentUser !== null;
-}
-if (!isLoggedIn()) {
-  document.querySelector(".account-content").innerHTML =
-    "<p>Bạn cần đăng nhập để truy cập trang này.</p>";
-  document.querySelector(".account-menu").style.display = "none";
-} else {
-  const user = getCurrentUser();
-  document.querySelector(".account-avatar img").src =
-    user.avatar || "https://via.placeholder.com/100x100?text=User";
-  document.querySelector(".account-avatar h3").textContent =
-    user.fullname || "Nguyễn Văn A";
-  document.querySelector(".account-avatar p").textContent = `Thành viên từ: ${
-    user.joinDate || "15/10/2022"
-  }`;
-}
-if (!isLoggedIn()) {
-  const loginButton = document.createElement("button");
-  loginButton.textContent = "Đăng nhập";
-  loginButton.className = "btn";
-  loginButton.onclick = () => {
-    window.location.href = "login.html";
-  };
 
-  const registerButton = document.createElement("button");
-  registerButton.textContent = "Đăng ký";
-  registerButton.className = "btn btn-outline";
-  registerButton.onclick = () => {
-    window.location.href = "register.html";
-  };
+const user = getCurrentUser();
+const accountContent = document.querySelector(".account-content");
+const accountMenu = document.querySelector(".account-menu");
+const sidebarName = document.querySelector(".account-info h3");
+const sidebarEmail = document.querySelector(".account-info p");
+const logoutLink = document.getElementById("logout");
 
-  const accountContent = document.querySelector(".account-content");
+if (!user) {
+  // Hiển thị yêu cầu đăng nhập
   accountContent.innerHTML = "<p>Bạn cần đăng nhập để truy cập trang này.</p>";
-  accountContent.appendChild(loginButton);
-  accountContent.appendChild(registerButton);
+  accountContent.innerHTML +=
+    '<button class="btn" onclick=\'window.location.href="/HTML/login.html"\'>Đăng nhập</button>';
+  accountContent.innerHTML +=
+    '<button class="btn btn-outline" onclick=\'window.location.href="/HTML/register.html"\'>Đăng ký</button>';
+  if (accountMenu) accountMenu.style.display = "none";
+} else {
+  // Điền thông tin vào form
+  const fullnameInput = document.getElementById("fullname");
+  if (fullnameInput) {
+    fullnameInput.value = user.username || user.name || "";
+  }
+  const phoneInput = document.getElementById("phone");
+  if (phoneInput) {
+    phoneInput.value = user.phone_number || "";
+  }
+  const emailInput = document.getElementById("email");
+  if (emailInput) {
+    emailInput.value = user.email || "";
+  }
+  const [year, month, day] = user.date_of_birth.split("-");
+  const birthDaySelect = document.querySelector('select[name="birth_day"]');
+  if (birthDaySelect) birthDaySelect.value = day;
+  const birthMonthSelect = document.querySelector('select[name="birth_month"]');
+  if (birthMonthSelect) birthMonthSelect.value = String(parseInt(month, 10));
+  const birthYearSelect = document.querySelector('select[name="birth_year"]');
+  if (birthYearSelect) birthYearSelect.value = year;
+  // Thiết lập giới tính
+  if (user.gender) {
+    const genderValue = CSS.escape(user.gender);
+    const genderInput = document.querySelector(
+      `input[name="gender"][value="${genderValue}"]`
+    );
+    if (genderInput) genderInput.checked = true;
+  }
+  if (sidebarName) sidebarName.textContent = user.username || user.name || "";
+  if (sidebarEmail) sidebarEmail.textContent = user.email || "";
+  // Cập nhật sidebar thông tin
+  if (sidebarName && (user.username || user.name)) {
+    sidebarName.textContent = user.username || user.name || "";
+  }
+  if (sidebarEmail && user.email) {
+    sidebarEmail.textContent = user.email || "";
+  }
+  // Xử lý đăng xuất
+  if (logoutLink) {
+    logoutLink.addEventListener("click", function (event) {
+      event.preventDefault();
+      clearCurrentUser();
+    });
+  }
 }
