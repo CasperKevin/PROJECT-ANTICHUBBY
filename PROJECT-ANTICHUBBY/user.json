@@ -28,5 +28,15 @@
     "phone_number": "123124123123",
     "user_rank": "user",
     "user_id": 3
+  },
+  {
+    "username": "Arazuki",
+    "email": "kfrog1233@gmail.com",
+    "password": "2222222",
+    "date_of_birth": "2006-02-03",
+    "address": "ằdawdawdawdawdaw",
+    "phone_number": "123124123123",
+    "user_rank": "user",
+    "user_id": 4
   }
 ]

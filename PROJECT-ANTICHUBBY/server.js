@@ -7,6 +7,8 @@ const bodyParser = require("body-parser");
 const app = express();
 const PORT = 5500;
 const DATA_PATH = path.join(__dirname, "user.json");
+const ADMIN_DATA_PATH = path.join(__dirname, "admin.json");
+const PRODUCTS_DATA_PATH = path.join(__dirname, "products.json");
 
 // Middleware
 app.use(cors());
@@ -63,6 +65,48 @@ app.post("/login", (req, res) => {
     if (user) {
       const { password, ...safeUser } = user;
       return res.status(200).send({ success: true, user: safeUser });
+    }
+
+    res.status(401).send({ success: false, message: "Invalid credentials" });
+  });
+});
+// API: Get all products
+app.get("/products", (req, res) => {
+  fs.readFile(PRODUCTS_DATA_PATH, "utf-8", (err, data) => {
+    if (err) return res.status(500).send("Error reading products file");
+
+    let products = [];
+    try {
+      products = JSON.parse(data);
+    } catch {
+      return res.status(500).send("Invalid products data");
+    }
+
+    res.status(200).json(products);
+  });
+});
+// API: Admin login
+app.post("/admin/login", (req, res) => {
+  const { username, password } = req.body;
+
+  fs.readFile(ADMIN_DATA_PATH, "utf-8", (err, data) => {
+    if (err)
+      return res.status(500).send({ success: false, message: "Server error" });
+
+    let admins = [];
+    try {
+      admins = JSON.parse(data);
+    } catch {
+      return res.status(500).send({ success: false, message: "Invalid data" });
+    }
+
+    const admin = admins.find(
+      (a) => a.username === username && a.password === password
+    );
+
+    if (admin) {
+      const { password, ...safeAdmin } = admin;
+      return res.status(200).send({ success: true, admin: safeAdmin });
     }
 
     res.status(401).send({ success: false, message: "Invalid credentials" });

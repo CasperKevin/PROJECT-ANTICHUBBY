@@ -1,0 +1,11 @@
+[
+  {
+    "id": 101,
+    "name": "Trần Trí Hùng",
+    "email": "hung01361@gmail.com",
+    "account-name": "hung01361",
+    "password": "12345678",
+    "role": "admin",
+    "status": "active"
+  }
+]
