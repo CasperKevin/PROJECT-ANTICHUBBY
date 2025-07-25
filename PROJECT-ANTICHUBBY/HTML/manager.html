@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gundam Store - Mô Hình Gundam Chính Hãng</title>
+    <link rel="stylesheet" href="/CSS/style.css" />
+    <link rel="stylesheet" href="/CSS/productmanager.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <div class="container">
+        <div class="header-top">
+          <div class="logo">
+            <a href="/index.html">
+              <img
+                src="/IMG/LOGO-removebg-preview.png"
+                alt="Gundam Store Logo"
+              />
+            </a>
+          </div>
+
+          <div class="search-box">
+            <input type="text" placeholder="Tìm kiếm sản phẩm..." />
+            <button><i class="fas fa-search"></i></button>
+          </div>
+
+          <div class="header-icons">
+            <a href="account.html" class="account"
+              ><i class="fas fa-user"></i
+            ></a>
+            <a href="wishlist.html" class="wishlist"
+              ><i class="fas fa-heart"></i
+            ></a>
+            <a href="cart.html" class="cart">
+              <i class="fas fa-shopping-cart"></i>
+              <span class="cart-count">0</span>
+            </a>
+          </div>
+        </div>
+
+        <nav class="main-nav">
+          <ul>
+            <li><a href="/index.html">Trang chủ</a></li>
+            <li class="dropdown">
+              <a href="products.html"
+                >Sản phẩm <i class="fas fa-chevron-down"></i
+              ></a>
+              <div class="dropdown-menu">
+                <a href="category.html?type=hg">High Grade (HG)</a>
+                <a href="category.html?type=rg">Real Grade (RG)</a>
+                <a href="category.html?type=mg">Master Grade (MG)</a>
+                <a href="category.html?type=pg">Perfect Grade (PG)</a>
+              </div>
+            </li>
+            <li><a href="about.html">Về chúng tôi</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="contact.html">Liên hệ</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <!-- Page Header -->
+    <section class="page-header">
+      <div class="container">
+        <h1>Sản Phẩm</h1>
+        <p>Khám phá bộ sưu tập mô hình Gundam của chúng tôi</p>
+      </div>
+    </section>
+
+    <!-- Products Content -->
+    <section class="products-page">
+      <div class="container">
+        <div class="products-grid">
+          <!-- Products Sidebar -->
+          <aside class="products-sidebar">
+            <div class="sidebar-widget">
+              <h3>Danh Mục</h3>
+              <ul class="category-list">
+                <li class="active">
+                  <a href="#">Tất cả sản phẩm <span>(128)</span></a>
+                </li>
+                <li>
+                  <a href="#">High Grade (HG) <span>(42)</span></a>
+                </li>
+                <li>
+                  <a href="#">Real Grade (RG) <span>(28)</span></a>
+                </li>
+                <li>
+                  <a href="#">Master Grade (MG) <span>(35)</span></a>
+                </li>
+                <li>
+                  <a href="#">Perfect Grade (PG) <span>(15)</span></a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="sidebar-widget">
+              <h3>Bộ Lọc</h3>
+              <div class="filter-group">
+                <h4>Giá</h4>
+                <div class="price-range">
+                  <input
+                    type="range"
+                    min="0"
+                    max="10000000"
+                    value="5000000"
+                    class="slider"
+                    id="priceRange"
+                  />
+                  <div class="price-values">
+                    <span>0đ</span>
+                    <span id="rangeValue">5,000,000đ</span>
+                    <span>10,000,000đ</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="filter-group">
+                <h4>Series</h4>
+                <div class="checkbox-list">
+                  <label
+                    ><input type="checkbox" checked /> Universal Century</label
+                  >
+                  <label><input type="checkbox" checked /> Gundam Wing</label>
+                  <label><input type="checkbox" checked /> Gundam Seed</label>
+                  <label
+                    ><input type="checkbox" checked /> Iron-Blooded
+                    Orphans</label
+                  >
+                  <label
+                    ><input type="checkbox" checked /> Witch from Mercury</label
+                  >
+                </div>
+              </div>
+
+              <div class="filter-group">
+                <h4>Tình Trạng</h4>
+                <div class="checkbox-list">
+                  <label><input type="checkbox" checked /> Còn hàng</label>
+                  <label><input type="checkbox" /> Hàng pre-order</label>
+                  <label><input type="checkbox" /> Hàng sắp về</label>
+                </div>
+              </div>
+
+              <button class="btn filter-btn">Áp dụng bộ lọc</button>
+              <button class="btn reset-btn">Đặt lại</button>
+            </div>
+
+            <div class="sidebar-widget">
+              <h3>Sản Phẩm Nổi Bật</h3>
+              <div class="featured-products horizontal-layout">
+                <!-- Sản phẩm 1 -->
+                <div class="featured-product horizontal">
+                  <div class="product-image">
+                    <img src="/IMG/rg-nu.webp" alt="RG Nu Gundam" />
+                  </div>
+                  <div class="product-info">
+                    <div class="product-text">
+                      <div class="product-name">RG Nu</div>
+                      <div class="product-series">Gundam</div>
+                    </div>
+                    <div class="price">1,200,000đ</div>
+                    <button class="btn-buy">Mua ngay</button>
+                  </div>
+                </div>
+
+                <!-- Sản phẩm 2 -->
+                <div class="featured-product horizontal">
+                  <div class="product-image">
+                    <img src="/IMG/mg-exia.webp" alt="MG Exia" />
+                  </div>
+                  <div class="product-info">
+                    <div class="product-text">
+                      <div class="product-name">MG Exia</div>
+                      <div class="product-series">Gundam 00</div>
+                    </div>
+                    <div class="price">1,100,000đ</div>
+                    <button class="btn-buy">Mua ngay</button>
+                  </div>
+                </div>
+
+                <!-- Sản phẩm 3 -->
+                <div class="featured-product horizontal">
+                  <div class="product-image">
+                    <img src="/IMG/hg-calibarn.webp" alt="HG Calibarn" />
+                  </div>
+                  <div class="product-info">
+                    <div class="product-text">
+                      <div class="product-name">HG Calibarn</div>
+                      <div class="product-series">Witch from Mercury</div>
+                    </div>
+                    <div class="price">450,000đ</div>
+                    <button class="btn-buy">Mua ngay</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </aside>
+
+          <!-- Main Products -->
+          <div class="main-products">
+            <div class="products-header">
+              <div class="sorting">
+                <label>Sắp xếp theo:</label>
+                <select>
+                  <option value="default">Mặc định</option>
+                  <option value="price-asc">Giá: Thấp đến cao</option>
+                  <option value="price-desc">Giá: Cao đến thấp</option>
+                  <option value="name-asc">Tên: A-Z</option>
+                  <option value="name-desc">Tên: Z-A</option>
+                  <option value="newest">Mới nhất</option>
+                  <option value="bestseller">Bán chạy</option>
+                </select>
+              </div>
+              <div class="view-options">
+                <span>Hiển thị:</span>
+                <button class="view-btn active" data-view="grid">
+                  <i class="fas fa-th"></i>
+                </button>
+                <button class="view-btn" data-view="list">
+                  <i class="fas fa-list"></i>
+                </button>
+              </div>
+            </div>
+
+            <div class="products-list grid-view">
+              <!-- Product Card -->
+              <div
+                class="product-card"
+                data-date="2023-10-01"
+                data-sales="150"
+                data-id="1"
+                data-name="MG vidar 1/100"
+                data-price="1500000"
+                data-image="/IMG/01-MG-100.webp"
+                data-rank="MG"
+                data-tag="Iron-Blooded Orphans"
+              >
+                <img src="/IMG/01-MG-100.webp" alt="MG vidar" />
+                <h3><a href="#">MG vidar 1/100</a></h3>
+                <div class="price">1,500,000đ</div>
+                <button
+                  class="btn add-to-cart"
+                  data-id="2"
+                  data-name="MG vidar 1/100"
+                  data-price="1500000"
+                  data-image="/IMG/01-MG-100.webp"
+                  data-rank="MG"
+                >
+                  Thêm vào giỏ
+                </button>
+<div class="product-buttons">
+  <button class="btn edit-product">Sửa</button>
+  <button class="btn delete-product">Xóa</button>
+</div>
+              </div>
+
+              <div
+                class="product-card"
+                data-date="2023-09-15"
+                data-sales="200"
+                data-id="2"
+                data-name="RG HI-V 1/144"
+                data-price="1300000"
+                data-image="/IMG/01-RG-144.webp"
+                data-rank="RG"
+                data-tag="Universal Century"
+              >
+                <img src="/IMG/01-RG-144.webp" alt="RG HI-V 1/144" />
+                <h3><a href="#">RG HI-V 1/144</a></h3>
+                <div class="price">1,300,000đ</div>
+                <button
+                  class="btn add-to-cart"
+                  data-id="2"
+                  data-name="RG HI-V 1/144"
+                  data-price="1300000"
+                  data-image="/IMG/01-RG-144.webp"
+                  data-rank="RG"
+                >
+                  Thêm vào giỏ
+                </button>
+<div class="product-buttons">
+  <button class="btn edit-product">Sửa</button>
+  <button class="btn delete-product">Xóa</button>
+</div>
+              </div>
+
+              <div
+                class="product-card"
+                data-date="2023-08-20"
+                data-sales="300"
+                data-id="3"
+                data-name="RG wing gundam"
+                data-price="700000"
+                data-image="/IMG/03-RG-144.webp"
+                data-rank="RG"
+                data-tag="Gundam Wing"
+              >
+                <img src="/IMG/03-RG-144.webp" alt="RG wing gundam" />
+                <h3><a href="#">RG wing gundam 1/144</a></h3>
+                <div class="price">700,000đ</div>
+                <button
+                  class="btn add-to-cart"
+                  data-id="3"
+                  data-name="RG wing gundam"
+                  data-price="700000"
+                  data-image="/IMG/03-RG-144.webp"
+                  data-rank="RG"
+                >
+                  Thêm vào giỏ
+                </button>
+<div class="product-buttons">
+  <button class="btn edit-product">Sửa</button>
+  <button class="btn delete-product">Xóa</button>
+</div>
+              </div>
+              <div
+                class="product-card"
+                data-date="2023-07-10"
+                data-sales="100"
+                data-id="4"
+                data-name="HG barbatos 1/144"
+                data-price="300000"
+                data-image="/IMG/10-HG-144.webp"
+                data-rank="HG"
+                data-tag="Iron-Blooded Orphans"
+              >
+                <img src="/IMG/10-HG-144.webp" alt="HG barbatos 1/144" />
+                <h3><a href="#">HG barbatos 1/144</a></h3>
+                <div class="price">300,000đ</div>
+                <button
+                  class="btn add-to-cart"
+                  data-id="4"
+                  data-name="HG barbatos 1/144"
+                  data-price="300000"
+                  data-image="/IMG/10-HG-144.webp"
+                  data-rank="HG"
+                >
+                  Thêm vào giỏ
+                </button>
+<div class="product-buttons">
+  <button class="btn edit-product">Sửa</button>
+  <button class="btn delete-product">Xóa</button>
+</div>
+              </div>
+              <div
+                class="product-card"
+                data-date="2023-06-05"
+                data-sales="250"
+                data-id="5"
+                data-name="RG unicorn gundam"
+                data-price="1800000"
+                data-image="/IMG/08-RG-144.webp"
+                data-rank="RG"
+                data-tag="Universal Century"
+              >
+                <img src="/IMG/08-RG-144.webp" alt="RG unicorn gundam" />
+                <h3><a href="#">RG unicorn gundam 1/144</a></h3>
+                <div class="price">1,800,000đ</div>
+                <button
+                  class="btn add-to-cart"
+                  data-id="5"
+                  data-name="RG unicorn gundam"
+                  data-price="1800000"
+                  data-image="/IMG/08-RG-144.webp"
+                  data-rank="RG"
+                >
+                  Thêm vào giỏ
+                </button>
+<div class="product-buttons">
+  <button class="btn edit-product">Sửa</button>
+  <button class="btn delete-product">Xóa</button>
+</div>
+              </div>
+              <div
+                class="product-card"
+                data-date="2023-05-15"
+                data-sales="400"
+                data-id="6"
+                data-name="PG strike gundam"
+                data-price="6000000"
+                data-image="/IMG/02-PG-70.jpg"
+                data-rank="PG"
+                data-tag="Gundam Seed"
+              >
+                <img src="/IMG/02-PG-70.webp" alt="PG strike gundam" />
+                <h3><a href="#">PG strike gundam 1/60</a></h3>
+                <div class="price">6,000,000đ</div>
+                <button
+                  class="btn add-to-cart"
+                  data-id="6"
+                  data-name="PG strike gundam"
+                  data-price="6000000"
+                  data-image="/IMG/02-PG-70.jpg"
+                  data-rank="PG"
+                >
+                  Thêm vào giỏ
+                </button>
+<div class="product-buttons">
+  <button class="btn edit-product">Sửa</button>
+  <button class="btn delete-product">Xóa</button>
+</div>
+              </div>
+              <div
+                class="product-card"
+                data-date="2023-04-20"
+                data-sales="180"
+                data-id="7"
+                data-name="MG sazabi ver ka"
+                data-price="6500000"
+                data-image="PG unicorn gundam"
+                data-rank="PG"
+                data-tag="Universal Century"
+              >
+                <img src="/IMG/01-PG-70.jpg" alt="PG unicorn gundam" />
+                <h3><a href="#">PG unicorn gundam 1/60</a></h3>
+                <div class="price">6,500,000đ</div>
+                <button
+                  class="btn add-to-cart"
+                  data-id="7"
+                  data-name="PG unicorn gundam"
+                  data-price="6500000"
+                  data-image="/IMG/04-MG-100.webp"
+                  data-rank="PG"
+                >
+                  Thêm vào giỏ
+                </button>
+<div class="product-buttons">
+  <button class="btn edit-product">Sửa</button>
+  <button class="btn delete-product">Xóa</button>
+</div>
+              </div>
+              <div
+                class="product-card"
+                data-date="2023-08-20"
+                data-sales="300"
+                data-id="8"
+                data-name="RG wing gundam zero ew"
+                data-price="700000"
+                data-image="/IMG/06-RG-144.webp"
+                data-rank="RG"
+                data-tag="Gundam Wing"
+              >
+                <img src="/IMG/06-RG-144.jpg" alt="RG wing gundam zero ew" />
+                <h3><a href="#">RG wing gundam zero ew</a></h3>
+                <div class="price">700,000đ</div>
+                <button
+                  class="btn add-to-cart"
+                  data-id="3"
+                  data-name="RG wing gundam zero ew"
+                  data-price="700000"
+                  data-image="/IMG/06-RG-144.webp"
+                  data-rank="RG"
+                >
+                  Thêm vào giỏ
+                </button>
+<div class="product-buttons">
+  <button class="btn edit-product">Sửa</button>
+  <button class="btn delete-product">Xóa</button>
+</div>
+              </div>
+              <div
+                class="product-card"
+                data-date="2023-07-10"
+                data-sales="100"
+                data-id="9"
+                data-name="MG barbatos 1/100"
+                data-price="1350000"
+                data-image="/IMG/09-HG-144.webp"
+                data-rank="MG"
+                data-tag="Iron-Blooded Orphans"
+              >
+                <img src="/IMG/09-HG-144.webp" alt="MG barbatos 1/100" />
+                <h3><a href="#">MG barbatos 1/100</a></h3>
+                <div class="price">1,350,000đ</div>
+                <button
+                  class="btn add-to-cart"
+                  data-id="9"
+                  data-name="MG barbatos 1/100"
+                  data-price="1350000"
+                  data-image="/IMG/09-HG-144.webp"
+                  data-rank="MG"
+                >
+                  Thêm vào giỏ
+                </button>
+<div class="product-buttons">
+  <button class="btn edit-product">Sửa</button>
+  <button class="btn delete-product">Xóa</button>
+</div>
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination">
+              <a href="#" class="page-numbers prev"
+                ><i class="fas fa-chevron-left"></i
+              ></a>
+              <a href="#" class="page-numbers active">1</a>
+              <a href="#" class="page-numbers">2</a>
+              <a href="#" class="page-numbers">3</a>
+              <a href="#" class="page-numbers">4</a>
+              <a href="#" class="page-numbers next"
+                ><i class="fas fa-chevron-right"></i
+              ></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-col">
+            <h3>Gundam Store</h3>
+            <p>
+              Chuyên cung cấp các mẫu mô hình Gundam chính hãng từ Bandai Nhật
+              Bản.
+            </p>
+            <div class="social-links">
+              <a href="#"><i class="fab fa-facebook-f"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+              <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+          </div>
+          <div class="footer-col">
+            <h3>Thông tin</h3>
+            <ul>
+              <li><a href="/HTML/about.html">Về chúng tôi</a></li>
+              <li><a href="/HTML/blog.html">Blog</a></li>
+              <li><a href="/HTML/contact.html">Liên hệ</a></li>
+              <li><a href="/HTML/policy.html">Chính sách bảo mật</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h3>Hỗ trợ</h3>
+            <ul>
+              <li><a href="/HTML/faq.html">Câu hỏi thường gặp</a></li>
+              <li><a href="/HTML/shipping.html">Vận chuyển</a></li>
+              <li><a href="/HTML/return.html">Đổi trả</a></li>
+              <li><a href="/HTML/payment.html">Thanh toán</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h3>Liên hệ</h3>
+            <ul class="contact-info">
+              <li>
+                <i class="fas fa-map-marker-alt"></i> Đường Võ Thị Sáu, Phường Thống Nhất, Biên Hòa, Đồng Nai
+              </li>
+              <li><i class="fas fa-phone"></i> (090) 926 4319</li>
+              <li><i class="fas fa-envelope"></i> GunplaVN@gmail.com</li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2025 Gundam Store. All rights reserved.</p>
+          <div class="payment-methods">
+            <img src="/IMG/Visa.png" alt="Visa" />
+            <img
+              src="/IMG/master-card-icon-4.png"
+              alt="Mastercard"
+            />
+            <img src="/IMG/mbbank-logo-5.png" alt="MBBank" />
+            <img src="/IMG/momo.webp" alt="MOMO" />
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="/public/productformanager.js"></script>
+  </body>
+</html>
