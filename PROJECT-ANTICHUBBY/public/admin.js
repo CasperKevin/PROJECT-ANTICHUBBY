@@ -1,9 +1,13 @@
+// Sửa tên cột cho khớp cấu trúc bảng
 app.post("/admin/login", async (req, res) => {
   const { username, password } = req.body;
   try {
     await sql.connect(dbConfig);
     const result = await sql.query`
-      SELECT * FROM Admin WHERE tenDangNhap = ${username} AND matKhau = ${password}`;
+      SELECT admin_id, username 
+      FROM Admin 
+      WHERE username = ${username} AND password = ${password}`;
+
     if (result.recordset.length > 0) {
       res.status(200).json({ success: true, admin: result.recordset[0] });
     } else {
