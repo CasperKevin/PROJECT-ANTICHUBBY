@@ -1,44 +1,55 @@
+// admin_product.js – sửa để sử dụng SQL Server thay vì file JSON
 const express = require("express");
-const fs = require("fs");
-const path = require("path");
+const sql = require("mssql");
 
 const router = express.Router();
-const PRODUCT_PATH = path.join(__dirname, "../product.json");
 
-// GET /products — trả về mảng sản phẩm
-router.get("/", (req, res) => {
-  fs.readFile(PRODUCT_PATH, "utf-8", (err, data) => {
-    if (err) return res.status(500).json({ message: "Error reading products" });
-    try {
-      const products = JSON.parse(data);
-      res.json(products);
-    } catch {
-      res.status(500).json({ message: "Invalid product data" });
-    }
-  });
+// SQL Server config (đồng bộ với server.js)
+const dbConfig = {
+  user: "your_username",
+  password: "your_password",
+  server: "localhost",
+  database: "GundamStore",
+  options: {
+    encrypt: false,
+    trustServerCertificate: true,
+  },
+};
+
+// GET /products — trả về danh sách sản phẩm
+router.get("/", async (req, res) => {
+  try {
+    await sql.connect(dbConfig);
+    const result = await sql.query("SELECT * FROM SanPham");
+    res.json(result.recordset);
+  } catch (err) {
+    console.error("SQL error:", err);
+    res.status(500).json({ message: "Database read error" });
+  }
 });
 
 // POST /products — thêm mới sản phẩm
-router.post("/", (req, res) => {
-  const newProduct = req.body;
-  fs.readFile(PRODUCT_PATH, "utf-8", (err, data) => {
-    if (err) return res.status(500).json({ message: "Error reading products" });
-    let products = [];
-    try {
-      products = JSON.parse(data);
-    } catch {
-      return res.status(500).json({ message: "Invalid product data" });
-    }
-    newProduct.product_id = products.length
-      ? products[products.length - 1].product_id + 1
-      : 1;
-    products.push(newProduct);
-    fs.writeFile(PRODUCT_PATH, JSON.stringify(products, null, 2), (err) => {
-      if (err)
-        return res.status(500).json({ message: "Error writing products" });
-      res.json({ message: "Product added successfully" });
-    });
-  });
+router.post("/", async (req, res) => {
+  const {
+    tenSanPham,
+    maLoaiSanPham,
+    maThuongHieu,
+    giaBan,
+    soLuong,
+    hinhAnh,
+    moTa,
+  } = req.body;
+  try {
+    await sql.connect(dbConfig);
+    await sql.query`
+      INSERT INTO SanPham (tenSanPham, maLoaiSanPham, maThuongHieu, giaBan, soLuong, hinhAnh, moTa)
+      VALUES (${tenSanPham}, ${maLoaiSanPham}, ${maThuongHieu}, ${giaBan}, ${soLuong}, ${hinhAnh}, ${moTa})
+    `;
+    res.json({ message: "Đã thêm sản phẩm thành công" });
+  } catch (err) {
+    console.error("Insert error:", err);
+    res.status(500).json({ message: "Database write error" });
+  }
 });
 
 module.exports = router;

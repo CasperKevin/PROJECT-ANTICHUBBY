@@ -1,36 +1,18 @@
-const express = require("express");
-const fs = require("fs");
-const path = require("path");
-
-const router = express.Router();
-const ADMIN_PATH = path.join(__dirname, "../admin.json");
-
-router.post("/login", (req, res) => {
+app.post("/admin/login", async (req, res) => {
   const { username, password } = req.body;
-  fs.readFile(ADMIN_PATH, "utf-8", (err, data) => {
-    if (err)
-      return res.status(500).json({ success: false, message: "Server error" });
-    let admins = [];
-    try {
-      admins = JSON.parse(data);
-    } catch {
-      return res
-        .status(500)
-        .json({ success: false, message: "Invalid admin data" });
-    }
-    const admin = admins.find(
-      (a) =>
-        (a.username === username || a.email === username) &&
-        a.password === password
-    );
-    if (!admin) {
-      return res
+  try {
+    await sql.connect(dbConfig);
+    const result = await sql.query`
+      SELECT * FROM Admin WHERE tenDangNhap = ${username} AND matKhau = ${password}`;
+    if (result.recordset.length > 0) {
+      res.status(200).json({ success: true, admin: result.recordset[0] });
+    } else {
+      res
         .status(401)
-        .json({ success: false, message: "Invalid credentials" });
+        .json({ success: false, message: "Sai thông tin quản trị viên" });
     }
-    const { password: _, ...safeAdmin } = admin;
-    res.json({ success: true, admin: safeAdmin });
-  });
+  } catch (err) {
+    console.error("Admin login error:", err);
+    res.status(500).json({ message: "Lỗi server" });
+  }
 });
-
-module.exports = router;
