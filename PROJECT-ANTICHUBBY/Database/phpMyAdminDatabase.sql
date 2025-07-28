@@ -156,22 +156,26 @@ VALUES
 ('Daban', 'Trung Quốc');
 INSERT INTO SanPham (tenSanPham, maLoaiSanPham, maThuongHieu, giaBan, soLuong, hinhAnh, moTa)
 VALUES
-(N'MG Vidar 1/100', 2, 1, 1500000, 10, N'vidar-mg.jpg', N'MG của Gundam Vidar từ Iron-Blooded Orphans'),
-(N'RG HI-V 1/144', 3, 1, 1300000, 10, N'hi-v-rg.jpg', N'Real Grade của Hi-V Gundam từ Char''s Counterattack'),
-(N'RG Wing Gundam 1/144', 3, 1, 700000, 15, N'wing-rg.jpg', N'Gundam cổ điển từ series Wing'),
-(N'HG Barbatos 1/144', 1, 1, 300000, 10, N'barbatos-hg.jpg', N'Mẫu HG của Gundam Barbatos từ Iron-Blooded Orphans'),
-(N'RG Unicorn Gundam 1/144', 3, 1, 1800000, 10, N'unicorn-rg.jpg', N'Phiên bản RG chuyển dạng từ Unicorn'),
-(N'PG Strike Gundam 1/60', 4, 1, 6000000, 5, N'strike-pg.jpg', N'Phiên bản PG tỉ lệ 1/60 của Strike'),
-(N'PG Unicorn Gundam 1/60', 4, 1, 6500000, 5, N'unicorn-pg-v2.jpg', N'PG Unicorn bản mới full armor'),
-(N'RG Wing Gundam Zero EW', 3, 1, 700000, 10, N'wing-zero-ew-rg.jpg', N'Phiên bản RG rẻ hơn, từ Endless Waltz'),
-(N'MG Barbatos 1/100', 2, 1, 1350000, 10, N'barbatos-mg.jpg', N'MG chi tiết cao từ Iron-Blooded Orphans'),
-(N'RG 1/144 Miku Hatsune''s Zaku II', 3, 1, 1000000, 8, N'zaku-miku.jpg', N'Zaku II phiên bản đặc biệt Hatsune Miku'),
-(N'MG NT-1 Alex 1/100', 2, 1, 1350000, 10, N'nt1-alex-mg.jpg', N'MG Gundam NT-1 Alex từ series War in the Pocket, thiết kế mạnh mẽ và chi tiết cao'),
-(N'HG STTS-808 Immortal Justice Gundam 1/144', 1, 1, 300000, 10, N'immortal-justice-hg.jpg', N'Mẫu HG của Immortal Justice Gundam từ Cosmic Era, tỉ lệ 1/144, thiết kế đẹp và hiện đại'),
-(N'RG Epyon 1/144', 3, 1, 1300000, 10, N'epyon-rg.jpg', N'RG Epyon đến từ series Gundam Wing với thiết kế đỏ mạnh mẽ, biến đổi dạng rồng'),
-(N'RG Nu Gundam 1/144', 3, 1, 1200000, 10, N'nu-gundam-rg.jpg', N'Mẫu RG của Nu Gundam với fin funnel đẹp mắt, đến từ Char''s Counterattack'),
-(N'MG Exia 1/100', 2, 1, 1100000, 10, N'exia-mg.jpg', N'MG Exia từ Gundam 00, khớp nối linh hoạt và GN Sword đặc trưng'),
-(N'HG Calibarn 1/144', 1, 1, 450000, 10, N'calibarn-hg.jpg', N'Mẫu HG đến từ series Witch from Mercury, thiết kế mới và độc đáo');
+(N'MG Vidar 1/100', 2, 1, 1500000, 10, N'01-MG-100.webp', N'MG của Gundam Vidar từ Iron-Blooded Orphans'),
+(N'RG HI-V 1/144', 3, 1, 1300000, 10, N'01-RG-144.webp', N'Real Grade của Hi-V Gundam từ Char''s Counterattack'),
+(N'RG Wing Gundam 1/144', 3, 1, 700000, 15, N'03-RG-144.webp', N'Gundam cổ điển từ series Wing'),
+(N'HG Barbatos 1/144', 1, 1, 300000, 10, N'10-HG-144.webp', N'Mẫu HG của Gundam Barbatos từ Iron-Blooded Orphans'),
+(N'RG Unicorn Gundam 1/144', 3, 1, 1800000, 10, N'08-RG-144.webp', N'Phiên bản RG chuyển dạng từ Unicorn'),
+(N'PG Strike Gundam 1/60', 4, 1, 6000000, 5, N'02-PG-70.webp', N'Phiên bản PG tỉ lệ 1/60 của Strike'),
+(N'PG Unicorn Gundam 1/60', 4, 1, 6500000, 5, N'01-PG-70.jpg', N'PG Unicorn bản mới full armor'),
+(N'RG Wing Gundam Zero EW', 3, 1, 700000, 10, N'06-RG-144.jpg', N'Phiên bản RG rẻ hơn, từ Endless Waltz'),
+(N'MG Barbatos 1/100', 2, 1, 1350000, 10, N'09-HG-144.webp', N'MG chi tiết cao từ Iron-Blooded Orphans'),
+(N'RG 1/144 Miku Hatsune''s Zaku II', 3, 1, 1000000, 10, N'10-RG-144.webp', N'Zaku II phiên bản đặc biệt Miku Hatsune, phối màu ấn tượng và chi tiết cao'),
+(N'MG MVF-X08 Eclipse 1/100', 2, 1, 1300000, 10, N'06-MG-100.jpeg', N'MG Eclipse Gundam với cánh cơ động và giáp góc cạnh, từ Gundam SEED Eclipse'),
+(N'MG NT-1 Alex 1/100', 2, 1, 1350000, 10, N'09-MG-100.webp', N'MG Gundam NT-1 Alex từ series War in the Pocket, thiết kế mạnh mẽ và chi tiết cao'),
+(N'HG STTS-808 Immortal Justice Gundam 1/144', 1, 1, 300000, 10, N'05-HG-144.webp', N'Mẫu HG của Immortal Justice Gundam từ Cosmic Era, tỉ lệ 1/144, thiết kế đẹp và hiện đại'),
+(N'RG Epyon 1/144', 3, 1, 900000, 10, N'05-RG-144.webp', N'RG Epyon đến từ Gundam Wing, màu đỏ đặc trưng, có khả năng biến hình thành dạng rồng');
+
+
+
+(N'RG Nu Gundam 1/144', 3, 1, 1200000, 10, N'rg-nu.webp', N'Mẫu RG của Nu Gundam với fin funnel đẹp mắt, đến từ Char''s Counterattack'),
+(N'MG Exia 1/100', 2, 1, 1100000, 10, N'mg-exia.webp', N'MG Exia từ Gundam 00, khớp nối linh hoạt và GN Sword đặc trưng'),
+(N'HG Calibarn 1/144', 1, 1, 450000, 10, N'hg-calibarn.webp', N'Mẫu HG đến từ series Witch from Mercury, thiết kế mới và độc đáo');
 
 -- Giỏ hàng
 INSERT INTO GioHang (maNguoiDung)
