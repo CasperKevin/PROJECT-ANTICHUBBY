@@ -2,6 +2,21 @@ const form = document.getElementById("registerForm");
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
 
+  // Kiểm tra các trường bắt buộc
+  if (
+    !form.username.value.trim() ||
+    !form.email.value.trim() ||
+    !form.password.value ||
+    !form.confirmPassword.value ||
+    !form.date_of_birth.value ||
+    !form.address.value.trim() ||
+    !form.phone_number.value.trim() ||
+    !form.user_rank.value
+  ) {
+    alert("Vui lòng điền đầy đủ thông tin.");
+    return;
+  }
+
   const user = {
     username: form.username.value.trim(),
     email: form.email.value.trim(),
@@ -18,6 +33,7 @@ form.addEventListener("submit", async (e) => {
   }
 
   try {
+    // Gửi dữ liệu đăng ký lên server để lưu vào database
     const res = await fetch("/register", {
       method: "POST",
       headers: { "Content-Type": "application/json" },

@@ -6,10 +6,10 @@ const router = express.Router();
 
 // SQL Server config (đồng bộ với server.js)
 const dbConfig = {
-  user: "your_username",
-  password: "your_password",
+  user: "MSI/Gluttony",
+  password: "",
   server: "localhost",
-  database: "GundamStore",
+  database: "CuaHangGundam",
   options: {
     encrypt: false,
     trustServerCertificate: true,

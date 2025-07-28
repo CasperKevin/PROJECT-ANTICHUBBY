@@ -7,12 +7,10 @@ const app = express();
 const PORT = 5500;
 
 const dbConfig = {
-  user: "your_username",
-  password: "your_password",
   server: "localhost",
   database: "GundamStore",
   options: {
-    encrypt: false,
+    trustedConnection: true,
     trustServerCertificate: true,
   },
 };

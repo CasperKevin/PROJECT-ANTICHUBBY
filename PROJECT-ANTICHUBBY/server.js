@@ -8,10 +8,10 @@ const PORT = 5500;
 
 // SQL Server config
 const dbConfig = {
-  user: "your_username",
-  password: "your_password",
+  user: "MSIGluttony",
+  password: "",
   server: "localhost", // or your server name
-  database: "your_database",
+  database: "CuaHangGundam",
   options: {
     encrypt: false, // set to true if using Azure
     trustServerCertificate: true,
@@ -28,11 +28,16 @@ app.post("/register", async (req, res) => {
   try {
     await sql.connect(dbConfig);
     const result = await sql.query`
-      INSERT INTO Users (username, email, password)
+      INSERT INTO NguoiDung (username, email, password)
       VALUES (${username}, ${email}, ${password});
       SELECT SCOPE_IDENTITY() AS user_id;
     `;
-    res.status(200).json({ message: "Registered successfully", user_id: result.recordset[0].user_id });
+    res
+      .status(200)
+      .json({
+        message: "Registered successfully",
+        user_id: result.recordset[0].user_id,
+      });
   } catch (err) {
     res.status(500).send("Error registering user");
   }
@@ -44,7 +49,7 @@ app.post("/login", async (req, res) => {
   try {
     await sql.connect(dbConfig);
     const result = await sql.query`
-      SELECT user_id, username, email FROM Users
+      SELECT user_id, username, email FROM NguoiDung
       WHERE (username = ${username} OR email = ${username}) AND password = ${password}
     `;
     if (result.recordset.length > 0) {
@@ -61,7 +66,7 @@ app.post("/login", async (req, res) => {
 app.get("/products", async (req, res) => {
   try {
     await sql.connect(dbConfig);
-    const result = await sql.query`SELECT * FROM Products`;
+    const result = await sql.query`SELECT * FROM SanPham`;
     res.status(200).json(result.recordset);
   } catch (err) {
     res.status(500).send("Error reading products");
@@ -74,7 +79,7 @@ app.post("/admin/login", async (req, res) => {
   try {
     await sql.connect(dbConfig);
     const result = await sql.query`
-      SELECT admin_id, username FROM Admins
+      SELECT admin_id, username FROM Admin
       WHERE username = ${username} AND password = ${password}
     `;
     if (result.recordset.length > 0) {

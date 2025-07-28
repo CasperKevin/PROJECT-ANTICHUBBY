@@ -20,7 +20,7 @@ document.querySelectorAll(".add-to-cart").forEach((btn) => {
 
     // Lưu giỏ hàng và thông báo
     localStorage.setItem("cart", JSON.stringify(cart));
-    window.dispatchEvent(new Event("storage")); // Kích hoạt cập nhật real-time
+    window.dispatchEvent(new Event("storage"));
     alert(`${product.name} đã được thêm vào giỏ hàng!`);
   });
 });
