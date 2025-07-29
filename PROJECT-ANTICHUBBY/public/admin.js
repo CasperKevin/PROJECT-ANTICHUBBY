@@ -1,12 +1,19 @@
-// Sửa tên cột cho khớp cấu trúc bảng
 app.post("/admin/login", async (req, res) => {
   const { username, password } = req.body;
   try {
-    await sql.connect(dbConfig);
+    await sql.connect({
+      server: "localhost\\SQLEXPRESS",
+      database: "CuaHangGundam",
+      options: {
+        trustedConnection: true,
+        driver: "msnodesqlv8",
+        instanceName: "SQLEXPRESS",
+      },
+    });
     const result = await sql.query`
-      SELECT admin_id, username 
+      SELECT maAdmin AS admin_id, tenDangNhap AS username 
       FROM Admin 
-      WHERE username = ${username} AND password = ${password}`;
+      WHERE tenDangNhap = ${username} AND matKhau = ${password}`;
 
     if (result.recordset.length > 0) {
       res.status(200).json({ success: true, admin: result.recordset[0] });

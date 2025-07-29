@@ -1,16 +1,19 @@
-// Sửa cấu hình kết nối
+const express = require("express");
+const sql = require("mssql/msnodesqlv8");
+
+const router = express.Router();
+
+// Sử dụng Windows Authentication
 const dbConfig = {
-  user: "MSIGluttony",
-  password: "your_password_here",
   server: "localhost\\SQLEXPRESS",
   database: "CuaHangGundam",
   options: {
-    encrypt: false,
-    trustServerCertificate: true,
+    trustedConnection: true,
+    driver: "msnodesqlv8",
+    instanceName: "SQLEXPRESS",
   },
 };
 
-// Sửa lỗi INSERT thiếu dấu phẩy
 router.post("/", async (req, res) => {
   const {
     tenSanPham,
