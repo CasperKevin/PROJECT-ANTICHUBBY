@@ -1,29 +1,20 @@
-app.post("/admin/login", async (req, res) => {
-  const { username, password } = req.body;
+async function loginAdmin(username, password) {
   try {
-    await sql.connect({
-      server: "localhost\\SQLEXPRESS",
-      database: "CuaHangGundam",
-      options: {
-        trustedConnection: true,
-        driver: "msnodesqlv8",
-        instanceName: "SQLEXPRESS",
-      },
+    const res = await fetch("/admin/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username, password }),
     });
-    const result = await sql.query`
-      SELECT maAdmin AS admin_id, tenDangNhap AS username 
-      FROM Admin 
-      WHERE tenDangNhap = ${username} AND matKhau = ${password}`;
-
-    if (result.recordset.length > 0) {
-      res.status(200).json({ success: true, admin: result.recordset[0] });
+    const data = await res.json();
+    if (data.success) {
+      alert("Đăng nhập admin thành công!");
+      localStorage.setItem("admin", JSON.stringify(data.admin));
+      window.location.href = "/HTML/manager.html";
     } else {
-      res
-        .status(401)
-        .json({ success: false, message: "Sai thông tin quản trị viên" });
+      alert(data.message);
     }
   } catch (err) {
-    console.error("Admin login error:", err);
-    res.status(500).json({ message: "Lỗi server" });
+    console.error(err);
+    alert("Không thể kết nối đến máy chủ");
   }
-});
+}
