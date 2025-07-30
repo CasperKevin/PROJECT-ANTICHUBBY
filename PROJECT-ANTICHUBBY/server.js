@@ -1,22 +1,22 @@
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
-const sql = require("mssql/msnodesqlv8");
+const sql = require("mssql");
 
 const app = express();
 const PORT = 5500;
 
-// Sử dụng Windows Authentication
+app.use(cors());
+app.use(express.json());
 const dbConfig = {
   user: "Arazuki",
   password: "887463",
-  server: "MSI\\SQLEXPRESS", // Sử dụng dấu \\ cho instance name
+  server: "localhost", // KHÔNG dùng 'localhost\\SQLEXPRESS'
+  port: 49695,
   database: "CuaHangGundam",
   options: {
     encrypt: false,
     trustServerCertificate: true,
-    connectTimeout: 30000,
-    requestTimeout: 30000,
   },
 };
 
@@ -31,21 +31,28 @@ pool
   });
 
 app.post("/register", async (req, res) => {
-  const { username, email, password, phone, address } = req.body;
+  // Đổi tên biến cho đồng bộ với client
+  const { username, email, password, phone_number, address } = req.body;
+
+  // Kiểm tra dữ liệu đầu vào
+  if (!username || !email || !password || !phone_number || !address) {
+    return res.status(400).json({ message: "Vui lòng điền đầy đủ thông tin." });
+  }
+
   try {
     const request = pool.request();
     const result = await request.query`
       INSERT INTO NguoiDung (hoTen, email, matKhau, soDienThoai, diaChi, ngayTao)
-      VALUES (${username}, ${email}, ${password}, ${phone}, ${address}, GETDATE());
+      VALUES (${username}, ${email}, ${password}, ${phone_number}, ${address}, GETDATE());
       SELECT SCOPE_IDENTITY() AS user_id;
     `;
     res.status(200).json({
-      message: "Registered successfully",
+      message: "Đăng ký thành công.",
       user_id: result.recordset[0].user_id,
     });
   } catch (err) {
     console.error("Registration error:", err);
-    res.status(500).send("Error registering user");
+    res.status(500).json({ message: "Đăng ký thất bại." });
   }
 });
 
@@ -67,4 +74,9 @@ app.post("/login", async (req, res) => {
     console.error("Login error:", err);
     res.status(500).send({ success: false, message: "Server error" });
   }
+});
+
+// Thêm dòng này để server lắng nghe kết nối
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
