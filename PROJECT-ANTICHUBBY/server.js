@@ -33,6 +33,166 @@ pool
   .catch((err) => {
     console.error(" Lỗi kết nối SQL:", err);
   });
+// API để lấy danh sách sản phẩm
+app.get("/api/products", async (req, res) => {
+  try {
+    const pool = await sql.connect(dbConfig);
+    const result = await pool.request().query(`
+      SELECT 
+        SanPham.*, 
+        LoaiSanPham.tenLoai,
+        ThuongHieu.tenThuongHieu
+      FROM SanPham
+      INNER JOIN LoaiSanPham ON SanPham.maLoaiSanPham = LoaiSanPham.maLoai
+      INNER JOIN ThuongHieu ON SanPham.maThuongHieu = ThuongHieu.maThuongHieu
+    `);
+    res.json(result.recordset);
+  } catch (err) {
+    console.error("Error fetching products:", err);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+// API để xóa sản phẩm
+app.delete("/api/products/:id", async (req, res) => {
+  const productId = req.params.id;
+
+  try {
+    const pool = await sql.connect(dbConfig);
+    const result = await pool
+      .request()
+      .input("productId", sql.Int, productId)
+      .query("DELETE FROM SanPham WHERE maSanPham = @productId");
+
+    if (result.rowsAffected[0] > 0) {
+      res.json({ success: true });
+    } else {
+      res.status(404).json({ error: "Product not found" });
+    }
+  } catch (err) {
+    console.error("Error deleting product:", err);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+// API để lấy danh mục
+app.get("/api/categories", async (req, res) => {
+  try {
+    const pool = await sql.connect(dbConfig);
+    const result = await pool.request().query("SELECT * FROM LoaiSanPham");
+    res.json(result.recordset);
+  } catch (err) {
+    console.error("Error fetching categories:", err);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+// API để lấy thương hiệu
+app.get("/api/brands", async (req, res) => {
+  try {
+    const pool = await sql.connect(dbConfig);
+    const result = await pool.request().query("SELECT * FROM ThuongHieu");
+    res.json(result.recordset);
+  } catch (err) {
+    console.error("Error fetching brands:", err);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+// API để lấy thông tin sản phẩm theo ID
+app.get("/api/products/:id", async (req, res) => {
+  const productId = req.params.id;
+
+  try {
+    const pool = await sql.connect(dbConfig);
+    const result = await pool
+      .request()
+      .input("productId", sql.Int, productId)
+      .query("SELECT * FROM SanPham WHERE maSanPham = @productId");
+
+    if (result.recordset.length > 0) {
+      res.json(result.recordset[0]);
+    } else {
+      res.status(404).json({ error: "Product not found" });
+    }
+  } catch (err) {
+    console.error("Error fetching product:", err);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+// API để tạo/cập nhật sản phẩm
+app.post("/api/products", async (req, res) => {
+  const productData = req.body;
+
+  try {
+    const pool = await sql.connect(dbConfig);
+    const result = await pool
+      .request()
+      .input("tenSanPham", sql.NVarChar, productData.tenSanPham)
+      .input("maLoaiSanPham", sql.Int, productData.maLoaiSanPham)
+      .input("maThuongHieu", sql.Int, productData.maThuongHieu)
+      .input("giaBan", sql.Decimal, productData.giaBan)
+      .input("hinhAnh", sql.NVarChar, productData.hinhAnh)
+      .input("moTa", sql.NText, productData.moTa).query(`
+        INSERT INTO SanPham (
+          tenSanPham, 
+          maLoaiSanPham, 
+          maThuongHieu, 
+          giaBan, 
+          hinhAnh, 
+          moTa
+        )
+        VALUES (
+          @tenSanPham, 
+          @maLoaiSanPham, 
+          @maThuongHieu, 
+          @giaBan, 
+          @hinhAnh, 
+          @moTa
+        );
+        SELECT SCOPE_IDENTITY() AS newId;
+      `);
+
+    res.json({
+      success: true,
+      newId: result.recordset[0].newId,
+    });
+  } catch (err) {
+    console.error("Error creating product:", err);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+app.put("/api/products/:id", async (req, res) => {
+  const productId = req.params.id;
+  const productData = req.body;
+
+  try {
+    const pool = await sql.connect(dbConfig);
+    await pool
+      .request()
+      .input("productId", sql.Int, productId)
+      .input("tenSanPham", sql.NVarChar, productData.tenSanPham)
+      .input("maLoaiSanPham", sql.Int, productData.maLoaiSanPham)
+      .input("maThuongHieu", sql.Int, productData.maThuongHieu)
+      .input("giaBan", sql.Decimal, productData.giaBan)
+      .input("hinhAnh", sql.NVarChar, productData.hinhAnh)
+      .input("moTa", sql.NText, productData.moTa).query(`
+        UPDATE SanPham SET
+          tenSanPham = @tenSanPham,
+          maLoaiSanPham = @maLoaiSanPham,
+          maThuongHieu = @maThuongHieu,
+          giaBan = @giaBan,
+          hinhAnh = @hinhAnh,
+          moTa = @moTa
+        WHERE maSanPham = @productId
+      `);
+
+    res.json({ success: true });
+  } catch (err) {
+    console.error("Error updating product:", err);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
 
 app.post("/register", async (req, res) => {
   // Đổi tên biến cho đồng bộ với client
