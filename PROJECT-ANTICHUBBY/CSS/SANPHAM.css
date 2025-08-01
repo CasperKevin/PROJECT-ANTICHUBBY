@@ -173,6 +173,22 @@
 .back-to-products i {
   margin-right: 5px;
 }
+.btn.buy-now {
+  background-color: #d10024;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background 0.3s;
+  width: 100%;
+}
+
+.btn.buy-now:hover {
+  background-color: #d10024;
+}
+
 
 /* Responsive */
 @media (max-width: 768px) {
