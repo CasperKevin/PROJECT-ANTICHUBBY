@@ -76,6 +76,7 @@
   background-color: #d33;
   color: #fff;
   padding: 8px 12px;
+  margin-bottom: 8px;
   border: none;
   border-radius: 6px;
   cursor: pointer;
@@ -97,6 +98,3 @@
     max-width: 90%;
   }
 }
-
-
-

@@ -3,7 +3,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
@@ -213,7 +213,7 @@ body {
   background: white;
   border-radius: 8px;
   padding: 12px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
   border: 1px solid #eee;
   gap: 15px;
@@ -221,7 +221,7 @@ body {
 
 .featured-product.horizontal:hover {
   transform: translateY(-3px);
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
 .featured-product.horizontal .product-image {
@@ -295,18 +295,18 @@ body {
   .featured-product.horizontal {
     flex-wrap: wrap;
   }
-  
+
   .featured-product.horizontal .product-info {
     flex-basis: 100%;
     order: 2;
     margin-top: 10px;
   }
-  
+
   .featured-product.horizontal .product-image {
     width: 60px;
     height: 60px;
   }
-  
+
   .featured-product.horizontal .btn-buy {
     margin-left: auto;
   }
@@ -321,7 +321,7 @@ body {
 .product-card {
   background: white;
   border-radius: 8px;
-  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
   padding: 20px;
   transition: all 0.3s ease;
   display: flex;
@@ -332,7 +332,7 @@ body {
 
 .product-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
 .product-card img {
@@ -373,26 +373,26 @@ body {
   .products-list.grid-view {
     grid-template-columns: repeat(2, 1fr);
   }
-  
+
   .products-grid {
     flex-direction: column;
   }
-  
+
   .products-sidebar {
     flex: 1;
     width: 100%;
   }
-  
+
   .featured-product.horizontal {
     flex-direction: column;
     align-items: flex-start;
   }
-  
+
   .featured-product.horizontal .product-info {
     width: 100%;
     margin-bottom: 10px;
   }
-  
+
   .featured-product.horizontal .btn-buy {
     width: 100%;
     margin-left: 0;
@@ -403,11 +403,11 @@ body {
   .products-list.grid-view {
     grid-template-columns: 1fr;
   }
-  
+
   .header-top {
     flex-wrap: wrap;
   }
-  
+
   .search-box {
     order: 3;
     width: 100%;
