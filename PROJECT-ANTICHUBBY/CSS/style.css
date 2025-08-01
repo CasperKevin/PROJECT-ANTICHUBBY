@@ -617,3 +617,6 @@ img {
     gap: 15px;
   }
 }
+.product-card .add-to-cart {
+  margin-bottom: 8px;
+}
