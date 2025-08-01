@@ -1,4 +1,5 @@
-const form = document.getElementById("loginForm") || document.querySelector("form");
+const form =
+  document.getElementById("loginForm") || document.querySelector("form");
 if (form) {
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -15,10 +16,16 @@ if (form) {
         body: JSON.stringify({ username, password }),
       });
 
+      // Xử lý response không thành công
+      if (!res.ok) {
+        const errorText = await res.text();
+        throw new Error(`Lỗi server: ${res.status} - ${errorText}`);
+      }
+
       const data = await res.json();
 
       if (data.success) {
-        localStorage.setItem("user", JSON.stringify(data.user));
+        localStorage.setItem("currentUser", JSON.stringify(data.user));
         if (data.role === "admin") {
           window.location.href = "/HTML/manager.html";
         } else {
@@ -29,7 +36,7 @@ if (form) {
       }
     } catch (err) {
       console.error("Login error:", err);
-      alert("Lỗi kết nối máy chủ");
+      alert(err.message || "Lỗi kết nối máy chủ");
     }
   });
 }

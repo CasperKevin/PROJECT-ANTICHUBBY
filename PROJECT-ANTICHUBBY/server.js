@@ -15,7 +15,7 @@ app.use(express.static(__dirname));
 const dbConfig = {
   user: "Arazuki",
   password: "887463",
-  server: "localhost", // KHÔNG dùng 'localhost\\SQLEXPRESS'
+  server: "localhost",
   port: 49695,
   database: "CuaHangGundam",
   options: {
@@ -62,30 +62,37 @@ app.post("/register", async (req, res) => {
 
 app.post("/login", async (req, res) => {
   const { username, password } = req.body;
+
   try {
-    await sql.connect(dbConfig);
-    const pool = await sql.connect(dbConfig);
+    // Sửa lại kết nối pool
+    const poolInstance = await sql.connect(dbConfig);
 
     // Kiểm tra admin
-    const adminResult = await pool.request().query`
+    const adminResult = await poolInstance.request().query`
       SELECT maAdmin AS id, tenDangNhap AS username FROM Admin
       WHERE tenDangNhap = ${username} AND matKhau = ${password}`;
 
     if (adminResult.recordset.length > 0) {
-      return res.send({
+      return res.json({
         success: true,
         role: "admin",
         user: adminResult.recordset[0],
       });
     }
 
-    // Kiểm tra người dùng thường
-    const userResult = await pool.request().query`
-      SELECT maNguoiDung AS id, hoTen AS username FROM NguoiDung
-      WHERE (hoTen = ${username} OR email = ${username}) AND matKhau = ${password}`;
+    // Sửa lại truy vấn người dùng - tạm thời chỉ lấy các trường cơ bản
+    const userResult = await poolInstance.request().query`
+      SELECT 
+        maNguoiDung AS id, 
+        hoTen AS username,
+        email,
+        soDienThoai AS phone_number
+      FROM NguoiDung
+      WHERE (hoTen = ${username} OR email = ${username}) 
+        AND matKhau = ${password}`;
 
     if (userResult.recordset.length > 0) {
-      return res.send({
+      return res.json({
         success: true,
         role: "user",
         user: userResult.recordset[0],
@@ -94,13 +101,20 @@ app.post("/login", async (req, res) => {
 
     res
       .status(401)
-      .send({ success: false, message: "Sai thông tin đăng nhập" });
+      .json({ success: false, message: "Sai thông tin đăng nhập" });
   } catch (err) {
     console.error("Login error:", err);
-    res.status(500).send({ success: false, message: "Lỗi server" });
+    res
+      .status(500)
+      .json({ success: false, message: "Lỗi server: " + err.message });
   }
 });
 
+async function hasColumn(columnName) {
+  // Triển khai logic kiểm tra cột ở đây
+  // Hoặc tạm thời return false nếu chưa triển khai
+  return false;
+}
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
