@@ -21,7 +21,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     const categories = await categoriesRes.json();
     const brands = await brandsRes.json();
 
-    // Điền danh mục
     categories.forEach((category) => {
       const option = document.createElement("option");
       option.value = category.maLoai;
@@ -37,7 +36,6 @@ document.addEventListener("DOMContentLoaded", async () => {
       productBrandSelect.appendChild(option);
     });
 
-    // Nếu có ID sản phẩm, tải dữ liệu sản phẩm
     if (productId) {
       const productRes = await fetch(`/api/products/${productId}`);
       const product = await productRes.json();
@@ -55,7 +53,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     alert("Đã xảy ra lỗi khi tải dữ liệu");
   }
 
-  // Xử lý gửi form
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
 

@@ -193,6 +193,34 @@ app.put("/api/products/:id", async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 });
+app.post("/api/update-profile", async (req, res) => {
+  const { userId, fullname, phone, date_of_birth, gender } = req.body;
+
+  try {
+    const pool = await sql.connect(dbConfig);
+    await pool
+      .request()
+      .input("userId", sql.Int, userId)
+      .input("fullname", sql.NVarChar, fullname)
+      .input("phone", sql.NVarChar, phone)
+      .input("date_of_birth", sql.Date, date_of_birth)
+      .input("gender", sql.NVarChar, gender).query(`
+        UPDATE NguoiDung SET
+          hoTen = @fullname,
+          soDienThoai = @phone,
+          ngaySinh = @date_of_birth,
+          gioiTinh = @gender
+        WHERE maNguoiDung = @userId
+      `);
+
+    res.json({ success: true });
+  } catch (err) {
+    console.error("Update profile error:", err);
+    res
+      .status(500)
+      .json({ success: false, message: "Lỗi khi cập nhật thông tin" });
+  }
+});
 
 app.post("/register", async (req, res) => {
   // Đổi tên biến cho đồng bộ với client
@@ -271,8 +299,6 @@ app.post("/login", async (req, res) => {
 });
 
 async function hasColumn(columnName) {
-  // Triển khai logic kiểm tra cột ở đây
-  // Hoặc tạm thời return false nếu chưa triển khai
   return false;
 }
 app.listen(PORT, () => {

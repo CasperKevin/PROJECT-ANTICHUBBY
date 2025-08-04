@@ -1,21 +1,31 @@
-//Kiem tra trang thai dang nhap
+// Sửa lại hàm kiểm tra trạng thái đăng nhập
 function checkLoginStatus() {
-  const token = localStorage.getItem("token");
-  if (token) {
-    return true;
-  } else {
-    return false;
-  }
+  const user = localStorage.getItem("currentUser");
+  return user ? true : false;
 }
-//Khi chuyen huong toi trang dang nhap neu chua dang nhap
+
+// Sửa lại hàm chuyển hướng
 function redirectToLogin() {
   if (!checkLoginStatus()) {
-    window.location.href = "login.html";
+    window.location.href = "/HTML/login.html";
   }
 }
-//Khi chuyen huong toi trang dang ky neu da dang nhap
+
+// Sửa lại hàm chuyển hướng khi đăng ký
 function redirectToRegister() {
   if (checkLoginStatus()) {
-    window.location.href = "index.html";
+    window.location.href = "/index.html";
+  }
+}
+function checkUserRole(requiredRole) {
+  const user = JSON.parse(localStorage.getItem("currentUser") || {});
+  return user.role === requiredRole;
+}
+
+// Sử dụng trong các trang admin
+function protectAdminPage() {
+  if (!checkUserRole("admin")) {
+    alert("Bạn không có quyền truy cập trang này");
+    window.location.href = "/index.html";
   }
 }
