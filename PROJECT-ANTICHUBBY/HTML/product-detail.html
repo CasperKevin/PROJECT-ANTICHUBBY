@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chi tiết sản phẩm - Gundam Store</title>
+    <link rel="stylesheet" href="/CSS/style.css" />
+    <link rel="stylesheet" href="/CSS/product-detail.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <div class="container">
+        <div class="header-top">
+          <div class="logo">
+            <a href="/index.html">
+              <img
+                src="/IMG/LOGO-removebg-preview.png"
+                alt="Gundam Store Logo"
+              />
+            </a>
+          </div>
+
+          <div class="search-box">
+            <input type="text" placeholder="Tìm kiếm sản phẩm..." />
+            <button><i class="fas fa-search"></i></button>
+          </div>
+
+          <div class="header-icons">
+            <a href="account.html" class="account"
+              ><i class="fas fa-user"></i
+            ></a>
+            <a href="wishlist.html" class="wishlist"
+              ><i class="fas fa-heart"></i
+            ></a>
+            <a href="cart.html" class="cart">
+              <i class="fas fa-shopping-cart"></i>
+              <span class="cart-count">0</span>
+            </a>
+          </div>
+        </div>
+
+        <nav class="main-nav">
+          <ul>
+            <li><a href="/index.html">Trang chủ</a></li>
+            <li class="dropdown">
+              <a href="products.html"
+                >Sản phẩm <i class="fas fa-chevron-down"></i
+              ></a>
+              <div class="dropdown-menu">
+                <a href="category.html?type=hg">High Grade (HG)</a>
+                <a href="category.html?type=rg">Real Grade (RG)</a>
+                <a href="category.html?type=mg">Master Grade (MG)</a>
+                <a href="category.html?type=pg">Perfect Grade (PG)</a>
+              </div>
+            </li>
+            <li><a href="about.html">Về chúng tôi</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="contact.html">Liên hệ</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+      <div class="container">
+        <h1 id="productDetailTitle">Chi Tiết Sản Phẩm</h1>
+      </div>
+    </section>
+
+    <!-- Product Detail -->
+    <section class="product-detail">
+      <div class="container">
+        <div class="product-detail-grid">
+          <div class="product-images">
+            <div class="main-image">
+              <img id="mainProductImage" src="" alt="Main Product Image" />
+            </div>
+            <div class="thumbnail-images" id="thumbnailContainer"></div>
+          </div>
+
+          <!-- Product Info -->
+          <div class="product-info">
+            <h1 id="productName"></h1>
+            <div class="product-meta">
+              <span class="product-rank" id="productRank"></span>
+              <span class="product-stock" id="productStock"></span>
+            </div>
+            <div class="price" id="productPrice"></div>
+            <div class="product-description" id="productDescription"></div>
+
+            <div class="product-actions">
+              <div class="quantity">
+                <label for="quantity">Số lượng:</label>
+                <input
+                  type="number"
+                  id="quantity"
+                  name="quantity"
+                  min="1"
+                  value="1"
+                />
+              </div>
+              <button class="btn add-to-cart" id="addToCartBtn">
+                <i class="fas fa-shopping-cart"></i> Thêm vào giỏ
+              </button>
+              <button class="btn buy-now" id="buyNowBtn">
+                <i class="fas fa-bolt"></i> Mua ngay
+              </button>
+            </div>
+
+            <div class="product-tags">
+              <span>Danh mục:</span>
+              <a href="#" id="productCategory"></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product Tabs -->
+        <div class="product-tabs">
+          <ul class="tab-nav">
+            <li class="active"><a href="#description">Mô tả chi tiết</a></li>
+            <li><a href="#specs">Thông số kỹ thuật</a></li>
+            <li><a href="#reviews">Đánh giá</a></li>
+          </ul>
+
+          <div class="tab-content">
+            <div id="description" class="tab-pane active">
+              <div id="fullDescription"></div>
+            </div>
+
+            <div id="specs" class="tab-pane">
+              <table class="specs-table">
+                <tr>
+                  <th>Tỷ lệ</th>
+                  <td id="specScale"></td>
+                </tr>
+                <tr>
+                  <th>Chiều cao</th>
+                  <td id="specHeight"></td>
+                </tr>
+                <tr>
+                  <th>Độ khó</th>
+                  <td id="specDifficulty"></td>
+                </tr>
+                <tr>
+                  <th>Khuyến nghị độ tuổi</th>
+                  <td id="specAge"></td>
+                </tr>
+              </table>
+            </div>
+
+            <div id="reviews" class="tab-pane">
+              <div class="reviews-summary">
+                <div class="average-rating">
+                  <span class="rating-stars">★★★★★</span>
+                  <span class="rating-value">4.8/5</span>
+                </div>
+                <div class="reviews-count">32 đánh giá</div>
+              </div>
+
+              <div class="reviews-list" id="reviewsList"></div>
+
+              <div class="review-form">
+                <h3>Viết đánh giá của bạn</h3>
+                <form id="reviewForm">
+                  <div class="form-group">
+                    <label for="reviewerName">Tên của bạn</label>
+                    <input type="text" id="reviewerName" required />
+                  </div>
+                  <div class="form-group">
+                    <label for="reviewRating">Đánh giá</label>
+                    <div class="rating-stars">
+                      <i class="far fa-star" data-value="1"></i>
+                      <i class="far fa-star" data-value="2"></i>
+                      <i class="far fa-star" data-value="3"></i>
+                      <i class="far fa-star" data-value="4"></i>
+                      <i class="far fa-star" data-value="5"></i>
+                    </div>
+                    <input type="hidden" id="reviewRating" value="0" />
+                  </div>
+                  <div class="form-group">
+                    <label for="reviewText">Đánh giá của bạn</label>
+                    <textarea id="reviewText" rows="5" required></textarea>
+                  </div>
+                  <button type="submit" class="btn">Gửi đánh giá</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Related Products -->
+    <section class="related-products">
+      <div class="container">
+        <h2>Sản phẩm liên quan</h2>
+<a href="/HTML/product-detail.html?id=${product.maSanPham}">
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer"></footer>
+
+    <script src="/JavaScript/product-detail.js"></script>
+  </body>
+</html>

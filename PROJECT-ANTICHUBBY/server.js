@@ -221,6 +221,121 @@ app.post("/api/update-profile", async (req, res) => {
       .json({ success: false, message: "Lỗi khi cập nhật thông tin" });
   }
 });
+// API để lấy thông tin sản phẩm theo ID
+app.get("/api/products/:id", async (req, res) => {
+  const productId = req.params.id;
+
+  try {
+    const pool = await sql.connect(dbConfig);
+    const result = await pool
+      .request()
+      .input("productId", sql.Int, productId)
+      .query("SELECT * FROM SanPham WHERE maSanPham = @productId");
+
+    if (result.recordset.length > 0) {
+      res.json(result.recordset[0]);
+    } else {
+      res.status(404).json({ error: "Product not found" });
+    }
+  } catch (err) {
+    console.error("Error fetching product:", err);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+// API để lấy sản phẩm liên quan
+app.get("/api/related-products", async (req, res) => {
+  const category = req.query.category;
+  const brand = req.query.brand;
+  const limit = parseInt(req.query.limit) || 4;
+
+  try {
+    const pool = await sql.connect(dbConfig);
+    let query = `
+      SELECT TOP ${limit} * 
+      FROM SanPham 
+      WHERE maLoaiSanPham = @category 
+        AND maThuongHieu = @brand 
+        AND maSanPham != @currentProduct
+      ORDER BY NEWID()
+    `;
+
+    const result = await pool
+      .request()
+      .input("category", sql.Int, category)
+      .input("brand", sql.Int, brand)
+      .input("currentProduct", sql.Int, req.query.exclude || 0)
+      .query(query);
+
+    // If we don't have enough related products, get more from the same category
+    if (result.recordset.length < limit) {
+      const additional = await pool
+        .request()
+        .input("category", sql.Int, category)
+        .input("limit", sql.Int, limit - result.recordset.length).query(`
+          SELECT TOP ${limit - result.recordset.length} * 
+          FROM SanPham 
+          WHERE maLoaiSanPham = @category 
+            AND maSanPham NOT IN (${
+              result.recordset.map((p) => p.maSanPham).join(",") || "0"
+            })
+          ORDER BY NEWID()
+        `);
+
+      result.recordset = [...result.recordset, ...additional.recordset];
+    }
+
+    res.json(result.recordset);
+  } catch (err) {
+    console.error("Error fetching related products:", err);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+app.get("/api/products", async (req, res) => {
+  try {
+    const sortValue = req.query.sort;
+    let orderBy = "ORDER BY SanPham.maSanPham DESC";
+
+    if (sortValue) {
+      switch (sortValue) {
+        case "price-asc":
+          orderBy = "ORDER BY giaBan ASC";
+          break;
+        case "price-desc":
+          orderBy = "ORDER BY giaBan DESC";
+          break;
+        case "name-asc":
+          orderBy = "ORDER BY tenSanPham ASC";
+          break;
+        case "name-desc":
+          orderBy = "ORDER BY tenSanPham DESC";
+          break;
+        case "newest":
+          orderBy = "ORDER BY ngayThem DESC";
+          break;
+        case "bestseller":
+          orderBy = "ORDER BY soLuongDaBan DESC";
+          break;
+      }
+    }
+
+    const query = `
+      SELECT SanPham.*, 
+        LoaiSanPham.tenLoai,
+        ThuongHieu.tenThuongHieu
+      FROM SanPham
+      INNER JOIN LoaiSanPham ON SanPham.maLoaiSanPham = LoaiSanPham.maLoai
+      INNER JOIN ThuongHieu ON SanPham.maThuongHieu = ThuongHieu.maThuongHieu
+      ${orderBy}
+    `;
+
+    const result = await pool.request().query(query);
+    res.json(result.recordset);
+  } catch (err) {
+    console.error("Error fetching products:", err);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
 
 app.post("/register", async (req, res) => {
   // Đổi tên biến cho đồng bộ với client
