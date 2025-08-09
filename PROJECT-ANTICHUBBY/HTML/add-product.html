@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thêm sản phẩm mới - Gundam Store</title>
+    <link rel="stylesheet" href="/CSS/style.css" />
+    <link rel="stylesheet" href="/CSS/edit-product.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <style>
+      /* Custom CSS for the add product page */
+      .add-product-container {
+        max-width: 800px;
+        margin: 40px auto;
+        padding: 30px;
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .add-product-header {
+        text-align: center;
+        margin-bottom: 30px;
+        padding-bottom: 15px;
+        border-bottom: 2px solid #e74c3c;
+      }
+
+      .add-product-header h1 {
+        color: #e74c3c;
+        font-size: 28px;
+        margin-bottom: 10px;
+      }
+
+      .add-product-header p {
+        color: #7f8c8d;
+        font-size: 16px;
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+        color: #2c3e50;
+      }
+
+      .form-control {
+        width: 100%;
+        padding: 12px 15px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 16px;
+        transition: border-color 0.3s;
+      }
+
+      .form-control:focus {
+        border-color: #3498db;
+        outline: none;
+        box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+      }
+
+      textarea.form-control {
+        min-height: 120px;
+        resize: vertical;
+      }
+
+      .form-row {
+        display: flex;
+        gap: 20px;
+        margin-bottom: 20px;
+      }
+
+      .form-row .form-group {
+        flex: 1;
+        margin-bottom: 0;
+      }
+
+      .image-upload-container {
+        border: 2px dashed #3498db;
+        border-radius: 10px;
+        padding: 30px;
+        text-align: center;
+        margin-bottom: 20px;
+        background: #f8f9fa;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+
+      .image-upload-container:hover {
+        background: #e3f2fd;
+        border-color: #e74c3c;
+      }
+
+      .image-upload-icon {
+        font-size: 48px;
+        color: #3498db;
+        margin-bottom: 15px;
+      }
+
+      .image-upload-text {
+        color: #7f8c8d;
+        margin-bottom: 15px;
+      }
+
+      .image-upload-text strong {
+        color: #3498db;
+      }
+
+      .image-preview-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+        margin-top: 20px;
+      }
+
+      .image-preview {
+        width: 120px;
+        height: 120px;
+        border-radius: 8px;
+        overflow: hidden;
+        position: relative;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .image-preview img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .image-preview .remove-btn {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        background: rgba(231, 76, 60, 0.8);
+        color: white;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        font-size: 14px;
+      }
+
+      .form-actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 15px;
+        margin-top: 30px;
+        padding-top: 20px;
+        border-top: 1px solid #eee;
+      }
+
+      .btn {
+        padding: 12px 25px;
+        border-radius: 5px;
+        font-weight: 600;
+        font-size: 16px;
+        cursor: pointer;
+        transition: all 0.3s;
+        border: none;
+      }
+
+      .btn-save {
+        background: #27ae60;
+        color: white;
+      }
+
+      .btn-save:hover {
+        background: #219653;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(39, 174, 96, 0.3);
+      }
+
+      .btn-cancel {
+        background: #e0e0e0;
+        color: #2c3e50;
+      }
+
+      .btn-cancel:hover {
+        background: #d0d0d0;
+        transform: translateY(-2px);
+      }
+
+      .required-field::after {
+        content: " *";
+        color: #e74c3c;
+      }
+
+      .gundam-icon {
+        display: inline-block;
+        width: 40px;
+        height: 40px;
+        background: #e74c3c;
+        border-radius: 50%;
+        color: white;
+        text-align: center;
+        line-height: 40px;
+        margin-right: 10px;
+      }
+
+      .instructions {
+        background: #e3f2fd;
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        border-left: 4px solid #3498db;
+      }
+
+      .instructions h3 {
+        margin-top: 0;
+        color: #2c3e50;
+      }
+
+      .instructions ul {
+        padding-left: 20px;
+        margin-bottom: 0;
+      }
+
+      .instructions li {
+        margin-bottom: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <div class="container">
+        <div class="header-top">
+          <div class="logo">
+            <a href="/index.html">
+              <img
+                src="/IMG/LOGO-removebg-preview.png"
+                alt="Gundam Store Logo"
+              />
+            </a>
+          </div>
+
+          <div class="header-icons">
+            <a href="account.html" class="account"
+              ><i class="fas fa-user"></i
+            ></a>
+            <a href="manager.html" class="admin"
+              ><i class="fas fa-cog"></i> Quản lý</a
+            >
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <section class="page-header">
+      <div class="container">
+        <h1>Thêm sản phẩm mới</h1>
+        <p>Mở rộng bộ sưu tập mô hình Gundam của bạn</p>
+      </div>
+    </section>
+
+    <div class="container">
+      <div class="add-product-container">
+        <div class="add-product-header">
+          <h1><i class="gundam-icon fas fa-robot"></i> Thêm sản phẩm mới</h1>
+          <p>Điền thông tin chi tiết về mô hình Gundam mới</p>
+        </div>
+
+        <div class="instructions">
+          <h3><i class="fas fa-info-circle"></i> Hướng dẫn thêm sản phẩm</h3>
+          <ul>
+            <li>
+              Đảm bảo tất cả các trường có dấu
+              <span style="color: #e74c3c">*</span> đều được điền đầy đủ
+            </li>
+            <li>Hình ảnh sản phẩm phải có định dạng .jpg, .png hoặc .webp</li>
+            <li>Giá sản phẩm phải lớn hơn 0</li>
+            <li>Số lượng tồn kho phải là số nguyên dương</li>
+          </ul>
+        </div>
+
+        <form id="addProductForm">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="productName" class="required-field"
+                >Tên sản phẩm</label
+              >
+              <input
+                type="text"
+                id="productName"
+                class="form-control"
+                placeholder="Ví dụ: MG RX-78-2 Gundam Ver. 3.0"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="productCategory" class="required-field"
+                >Danh mục</label
+              >
+              <select id="productCategory" class="form-control" required>
+                <option value="">-- Chọn danh mục --</option>
+                <option value="1">High Grade (HG)</option>
+                <option value="2">Master Grade (MG)</option>
+                <option value="3">Real Grade (RG)</option>
+                <option value="4">Perfect Grade (PG)</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="productBrand" class="required-field"
+                >Thương hiệu</label
+              >
+              <select id="productBrand" class="form-control" required>
+                <option value="">-- Chọn thương hiệu --</option>
+                <option value="1">Bandai</option>
+                <option value="2">Kotobukiya</option>
+                <option value="3">Daban</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="productPrice" class="required-field"
+                >Giá bán (VND)</label
+              >
+              <input
+                type="number"
+                id="productPrice"
+                class="form-control"
+                min="1000"
+                placeholder="Ví dụ: 1500000"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="productStock" class="required-field"
+                >Số lượng tồn kho</label
+              >
+              <input
+                type="number"
+                id="productStock"
+                class="form-control"
+                min="0"
+                placeholder="Ví dụ: 15"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="productImage" class="required-field"
+              >Hình ảnh sản phẩm</label
+            >
+            <div class="image-upload-container" id="imageUploadContainer">
+              <div class="image-upload-icon">
+                <i class="fas fa-cloud-upload-alt"></i>
+              </div>
+              <p class="image-upload-text">
+                Kéo thả hình ảnh vào đây hoặc <strong>chọn từ thiết bị</strong>
+              </p>
+              <p class="text-muted">Định dạng hỗ trợ: .jpg, .png, .webp</p>
+              <input
+                type="file"
+                id="productImage"
+                accept="image/*"
+                style="display: none"
+              />
+            </div>
+            <div class="image-preview-container" id="imagePreviewContainer">
+              <!-- Image previews will be added here -->
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="productDescription">Mô tả sản phẩm</label>
+            <textarea
+              id="productDescription"
+              class="form-control"
+              placeholder="Mô tả chi tiết về sản phẩm..."
+            ></textarea>
+          </div>
+
+          <div class="form-actions">
+            <button
+              type="button"
+              class="btn btn-cancel"
+              onclick="window.history.back()"
+            >
+              Hủy bỏ
+            </button>
+            <button type="submit" class="btn btn-save">Lưu sản phẩm</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-bottom">
+          <p>&copy; 2025 Gundam Store. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Handle image upload and preview
+      document.addEventListener("DOMContentLoaded", function () {
+        const imageUploadContainer = document.getElementById(
+          "imageUploadContainer"
+        );
+        const fileInput = document.getElementById("productImage");
+        const previewContainer = document.getElementById(
+          "imagePreviewContainer"
+        );
+
+        // Open file browser when clicking on upload area
+        imageUploadContainer.addEventListener("click", () => {
+          fileInput.click();
+        });
+
+        fileInput.addEventListener("change", function (e) {
+          const files = e.target.files;
+
+          for (let i = 0; i < files.length; i++) {
+            const file = files[i];
+
+            if (!file.type.match("image.*")) {
+              alert("Vui lòng chọn file hình ảnh!");
+              continue;
+            }
+
+            // Create preview
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+              const preview = document.createElement("div");
+              preview.className = "image-preview";
+
+              preview.innerHTML = `
+                            <img src="${e.target.result}" alt="Preview">
+                            <div class="remove-btn" onclick="this.parentElement.remove()">
+                                <i class="fas fa-times"></i>
+                            </div>
+                        `;
+
+              previewContainer.appendChild(preview);
+            };
+
+            reader.readAsDataURL(file);
+          }
+          fileInput.value = "";
+        });
+
+        document
+          .getElementById("addProductForm")
+          .addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            const productName = document.getElementById("productName").value;
+            const category = document.getElementById("productCategory").value;
+            const brand = document.getElementById("productBrand").value;
+            const price = document.getElementById("productPrice").value;
+            const stock = document.getElementById("productStock").value;
+            const previews =
+              previewContainer.querySelectorAll(".image-preview");
+
+            if (!productName || !category || !brand || !price || !stock) {
+              alert("Vui lòng điền đầy đủ thông tin bắt buộc!");
+              return;
+            }
+
+            if (previews.length === 0) {
+              alert("Vui lòng thêm ít nhất một hình ảnh sản phẩm!");
+              return;
+            }
+
+            const images = [];
+            previews.forEach((preview) => {
+              const imgSrc = preview.querySelector("img").src;
+              images.push(imgSrc);
+            });
+
+            // Create product object
+            const newProduct = {
+              name: productName,
+              category: category,
+              brand: brand,
+              price: price,
+              stock: stock,
+              description: document.getElementById("productDescription").value,
+              images: images,
+            };
+
+            console.log("New product data:", newProduct);
+
+            alert("Sản phẩm đã được thêm thành công!");
+
+            document.getElementById("addProductForm").reset();
+            previewContainer.innerHTML = "";
+          });
+
+        imageUploadContainer.addEventListener("dragover", function (e) {
+          e.preventDefault();
+          this.style.borderColor = "#27ae60";
+          this.style.backgroundColor = "#e8f5e9";
+        });
+
+        imageUploadContainer.addEventListener("dragleave", function (e) {
+          e.preventDefault();
+          this.style.borderColor = "#3498db";
+          this.style.backgroundColor = "#f8f9fa";
+        });
+
+        imageUploadContainer.addEventListener("drop", function (e) {
+          e.preventDefault();
+          this.style.borderColor = "#3498db";
+          this.style.backgroundColor = "#f8f9fa";
+
+          const files = e.dataTransfer.files;
+          fileInput.files = files;
+
+          const event = new Event("change", { bubbles: true });
+          fileInput.dispatchEvent(event);
+        });
+      });
+    </script>
+  </body>
+</html>

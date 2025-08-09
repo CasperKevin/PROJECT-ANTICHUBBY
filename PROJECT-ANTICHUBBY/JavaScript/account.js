@@ -39,13 +39,24 @@ if (!user) {
   if (emailInput) {
     emailInput.value = user.email || "";
   }
-  const [year, month, day] = user.date_of_birth.split("-");
-  const birthDaySelect = document.querySelector('select[name="birth_day"]');
-  if (birthDaySelect) birthDaySelect.value = day;
-  const birthMonthSelect = document.querySelector('select[name="birth_month"]');
-  if (birthMonthSelect) birthMonthSelect.value = String(parseInt(month, 10));
-  const birthYearSelect = document.querySelector('select[name="birth_year"]');
-  if (birthYearSelect) birthYearSelect.value = year;
+  // Kiểm tra và xử lý ngày sinh
+  if (user && user.date_of_birth) {
+    const parts = user.date_of_birth.split("-");
+    if (parts.length === 3) {
+      const [year, month, day] = parts;
+      const birthDaySelect = document.querySelector('select[name="birth_day"]');
+      if (birthDaySelect) birthDaySelect.value = day;
+      const birthMonthSelect = document.querySelector(
+        'select[name="birth_month"]'
+      );
+      if (birthMonthSelect)
+        birthMonthSelect.value = String(parseInt(month, 10));
+      const birthYearSelect = document.querySelector(
+        'select[name="birth_year"]'
+      );
+      if (birthYearSelect) birthYearSelect.value = year;
+    }
+  }
   // Thiết lập giới tính
   if (user.gender) {
     const genderValue = CSS.escape(user.gender);
@@ -68,7 +79,7 @@ if (!user) {
     logout.addEventListener("click", function (event) {
       event.preventDefault();
       clearCurrentUser();
-      window.location.href = "/HTML/index.html";
+      window.location.href = "/index.html";
     });
   }
 }
